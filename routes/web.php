@@ -27,14 +27,9 @@ Route::get('/', function () {
 //    Route::get('/index', 'IndexController@index');
 //});
 
-
 //Route::get('home/index', 'Home\IndexController@index');
-//
 //Route::get('admin/index', 'Admin\IndexController@index');
-//
 //Route::get('home/user/user', 'Home\UserController@user');
-
-
 
 //前台路由组
 Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
@@ -50,10 +45,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     // 控制器在 "App\Http\Controllers\Admin" 命名空间下
 
     //后台index
-//    Route::get('/', [
-//        'as' => 'index', 'uses' => 'Index@index'
-//    ]);
-
     Route::get('/index', 'IndexController@index');
 
     //话题列表

@@ -71,6 +71,8 @@ class TopicController extends Controller
     //新建
     public function store(Request $request)
     {
+
+
         $this->validate($request, [
             'title' => 'required|string',
             'content' => 'required|string',

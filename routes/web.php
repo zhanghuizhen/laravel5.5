@@ -67,7 +67,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
         'as' => 'topic/delete/{id}', 'uses' => 'TopicController@delete'
     ]);
 
-    //话题删除
+    //话题详情
     Route::get('topic/show/{id}', [
         'as' => 'topic/show/{id}', 'uses' => 'TopicController@show'
     ]);

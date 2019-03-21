@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Admin;
 
 use Response;
 
+use App\repositories\Topic as TopicRepo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Topic as TopicModel;
@@ -29,50 +30,21 @@ class TopicController extends Controller
             'per_page' => 'numeric'
         ]);
 
-        $query = TopicModel::with('users');
+        $params = $request->only(['id', 'user_id', 'title', 'content', 'state',
+            'publish_start_time', 'publish_end_time', 'per_page']);
 
-        if ($request->has('id')) {
-            $query->where('id', $request->get('id'));
-        }
-
-        if ($request->has('user_id')) {
-            $query->where('user_id', $request->get('user_id'));
-        }
-
-        if ($request->has('title')) {
-            $query->where('title', 'like', '%' . $request->get('title') . '%');
-        }
-
-        if ($request->has('content')) {
-            $query->where('content', 'like', '%' . $request->get('content') . '%');
-        }
-
-        if ($request->has('state')) {
-            $query->where('state', $request->get('state'));
-        }
-
-        if ($request->has('publish_start_time')) {
-            $query->where('published_at', '>=', 'publush_start_time');
-        }
-
-        if ($request->has('publish_end_time')) {
-            $query->where('published_at', '<=', 'publush_end_time');
-        }
-
-        $per_page = $request->get('per_page', $this->defaultRerPage());
-        $data = $query->paginate($per_page);
+        $topicRepo = new TopicRepo();
+        $list = $topicRepo->getList($params);
 
         return Response::json([
             'code' => 0,
-            'data' => $data,
+            'data' => $list,
         ]);
     }
 
     //新建
     public function store(Request $request)
     {
-
-
         $this->validate($request, [
             'title' => 'required|string',
             'content' => 'required|string',
@@ -88,7 +60,9 @@ class TopicController extends Controller
         $params = $request->only(['title', 'content', 'cover']);
         $params['state'] = 'published';
         $params['published_at'] = date('Y-m-d H:m:i');
-        $topic = TopicModel::create($params);
+
+        $topicRepo = new TopicRepo();
+        $topic = $topicRepo->store($params);
 
         return Response::json([
             'code' => 0,
@@ -113,17 +87,8 @@ class TopicController extends Controller
 
         $params = $request->only(['title', 'content', 'cover']);
 
-        $topic = TopicModel::find($id);
-
-        if (! $topic) {
-            throw new \Exception('id为' . $id . '的社区广场数据不存在');
-        }
-
-        $result = $topic->update($params);
-
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
-        }
+        $topicRepo = new TopicRepo();
+        $topicRepo->update($id, $params);
 
         return Response::json([
             'code' => 0,
@@ -133,17 +98,8 @@ class TopicController extends Controller
     //删除
     public function delete($id)
     {
-        $topic = TopicModel::find($id);
-
-        if (! $topic) {
-            throw new \Exception('id为' . $id . '的社区广场数据不存在');
-        }
-
-        $result = $topic->delete();
-
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据删除失败');
-        }
+        $topicRepo = new TopicRepo();
+        $topicRepo->delete($id);
 
         return Response::json([
             'code' => 0,
@@ -153,11 +109,9 @@ class TopicController extends Controller
     //查看
     public function show($id)
     {
-        $topic = TopicModel::find($id);
+        $topicRepo = new TopicRepo();
 
-        if (! $topic) {
-            throw new \Exception('id为' . $id . '的社区广场数据不存在');
-        }
+        $topic = $topicRepo->getOne($id);
 
         return Response::json([
             'code' => 0,

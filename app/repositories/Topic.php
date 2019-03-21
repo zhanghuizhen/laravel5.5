@@ -1,19 +1,20 @@
 <?php
 /**
- * 小区公告 repo
- * Date: 2019/3/6
- * Time: 11:55
+ * 社区广场repo
+ * Date: 2019/3/21
+ * Time: 19:19
  */
 
 namespace App\repositories;
-use App\Models\Notice as NoticeModel;
 
-class Notice extends BaseRepo
+use App\Models\Topic as TopicModel;
+
+class Topic extends BaseRepo
 {
     //列表
-    public function getList()
+    public function getList($params = [])
     {
-        $query = NoticeModel::with('users');
+        $query = TopicModel::with('users');
 
         if (! empty($params['id'])) {
             $query->where('id', $params['id']);
@@ -52,40 +53,41 @@ class Notice extends BaseRepo
         return $list;
     }
 
-    //获取指定id的数据的详情
+    //获取指定id的数据详情
     public function getOne($id)
     {
-        $notice = NoticeModel::with('users')->find($id);
+        $topic = TopicModel::with('users')->find($id);
 
-        if (! $notice) {
+        if (! $topic) {
             throw new \Exception('id为' . $id . '的数据不存在');
         }
 
-        return $notice;
+        return $topic;
     }
 
     //创建
     public function store($params)
     {
-        $notice = NoticeModel::create($params);
+        $topic = TopicModel::create($params);
 
-        if (! $notice) {
-            throw new \Exception('id为' . $notice->id .'的数据创建失败');
+        if (! $topic) {
+            throw new \Exception('id为' . $topic->id . '的数据创建失败');
         }
 
-        return $notice;
+        return $topic;
     }
 
     //更新
     public function update($id, $params)
     {
-        $notice = NoticeModel::find($id);
+        $topic = TopicModel::find($id);
 
-        if (! $notice) {
+        if (! $topic) {
             throw new \Exception('id为' . $id . '的数据不存在');
         }
 
-        $result = $notice->update($params);
+        //result 为 true or false
+        $result = $topic->update($params);
 
         if (! $result) {
             throw new \Exception('id为' . $id . '的数据更新失败');
@@ -95,18 +97,17 @@ class Notice extends BaseRepo
     //删除
     public function delete($id)
     {
-        $notice = NoticeModel::find($id);
+        $topic = TopicModel::find($id);
 
-        if (! $notice) {
+        if (! $topic) {
             throw new \Exception('id为' . $id . '的数据不存在');
         }
 
-        $result = $notice->delete();
+        $result = $topic->delete();
 
         if (! $result) {
-            throw new \Exception('id为' . $id .'的数据删除失败');
+            throw new \Exception('id为' . $id . '的数据删除失败');
         }
-
     }
 
 }

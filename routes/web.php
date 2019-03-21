@@ -48,59 +48,39 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('/index', 'IndexController@index');
 
     //话题列表
-    Route::get('topic/index', [
-        'as' => 'topic/index', 'uses' => 'TopicController@index'
-    ]);
+    Route::get('topic/index', 'TopicController@index');
 
     //话题创建
-    Route::post('topic/store', [
-        'as' => 'topic/store', 'uses' => 'TopicController@store'
-    ]);
+    Route::post('topic/store', 'TopicController@store');
 
     //话题更新
-    Route::put('topic/update/{id}', [
-        'as' => 'topic/update/{id}', 'uses' => 'TopicController@update'
-    ]);
+    Route::put('topic/update/{id}', 'TopicController@update');
 
     //话题删除
-    Route::delete('topic/delete/{id}', [
-        'as' => 'topic/delete/{id}', 'uses' => 'TopicController@delete'
-    ]);
+    Route::delete('topic/delete/{id}', 'TopicController@delete');
 
     //话题详情
-    Route::get('topic/show/{id}', [
-        'as' => 'topic/show/{id}', 'uses' => 'TopicController@show'
-    ]);
+    Route::get('topic/show/{id}', 'TopicController@show');
 
     //话题发布
-    Route::put('topic/publish/{id}', [
-        'as' => 'topic/publish/{id}', 'uses' => 'TopicController@publish'
-    ]);
+    Route::put('topic/publish/{id}', 'TopicController@publish');
 
     //话题下线
-    Route::put('topic/offline/{id}', [
-        'as' => 'topic/offline/{id}', 'uses' => 'TopicController@offline'
-    ]);
+    Route::put('topic/offline/{id}', 'TopicController@offline');
+
+    //公告
+    Route::get('notice/index', 'NoticeController@index');
+
+    Route::post('notice/store', 'NoticeController@store');
+
+    Route::put('notice/update/{id}', 'NoticeController@update');
+
+    Route::delete('notice/delete/{id}', 'NoticeController@delete');
+
+    Route::put('notice/publish/{id}', 'NoticeController@publish');
+
+    Route::put('notice/offline/{id}', 'NoticeController@offline');
 
 
-    //公告列表
-    Route::get('notice/index', [
-        'as' => 'notice/index', 'uses' => 'NoticeController@index'
-    ]);
-
-    //公告创建
-    Route::post('notice/store', [
-        'as' => 'notice/store', 'uses' => 'NoticeController@store'
-    ]);
-
-    //公告更新
-    Route::put('notice/update/{id}', [
-        'as' => 'notice/update/{id}', 'uses' => 'NoticeController@update'
-    ]);
-
-    //公告删除
-    Route::delete('notice/delete/{id}', [
-        'as' => 'notice/delete/{id}', 'uses' => 'NoticeController@delete'
-    ]);
 
 });

@@ -13,6 +13,15 @@ class SuggestController extends Controller
     //列表
     public function index(Request $request)
     {
+        $this->validate($request, [
+            'id' => 'numeric|min:1',
+            'content' => 'string',
+            'state' => 'string',
+            'type' => 'string',
+        ]);
+
+        $params = $request->only(['id', 'content', 'state', 'type']);
+
 
     }
 

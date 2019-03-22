@@ -81,6 +81,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
     Route::put('notice/offline/{id}', 'NoticeController@offline');
 
+    Route::get('notice/show/{id}', 'NoticeController@show');
 
 
 });

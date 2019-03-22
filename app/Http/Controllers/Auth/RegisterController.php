@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * 注册
+ */
 namespace App\Http\Controllers\Auth;
 
 use App\User;

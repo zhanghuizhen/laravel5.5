@@ -7,8 +7,5 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function user()
-    {
-        return '张慧珍';
-    }
+
 }

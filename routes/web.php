@@ -15,21 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/index', 'IndexController@index');
-//
-//Route::prefix('admin')->group(function () {
-//    Route::get('index', 'Admin\IndexController@index');
-//});
-//
-//Route::namespace('Home')->group(function () {
-//    // 在 "App\Http\Controllers\Home" 命名空间下的控制器
-//
-//    Route::get('/index', 'IndexController@index');
-//});
+Route::namespace('Auth')->prefix('auth')->group(function () {
+    // 在 "App\Http\Controllers\Auth" 命名空间下的控制器
+    //注册
+    Route::post('register', 'RegisterController@register');
 
-//Route::get('home/index', 'Home\IndexController@index');
-//Route::get('admin/index', 'Admin\IndexController@index');
-//Route::get('home/user/user', 'Home\UserController@user');
+    //登录
+    Route::post('login', 'LoginController@login');
+
+    //注销登录
+    Route::post('logout', 'LogoutController@logout');
+});
 
 //前台路由组
 Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
@@ -85,3 +81,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

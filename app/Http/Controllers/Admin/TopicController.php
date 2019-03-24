@@ -61,6 +61,9 @@ class TopicController extends Controller
         $params['state'] = 'published';
         $params['published_at'] = date('Y-m-d H:m:i');
 
+        $user_id = session('logined_id');
+        $params['user_id'] = $user_id;
+
         $topicRepo = new TopicRepo();
         $topic = $topicRepo->store($params);
 

@@ -34,6 +34,29 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
     //前台index
     Route::get('/index', 'IndexController@index');
 
+    //用户
+    Route::put('user/edit/{id}', 'UserController@edit');
+
+    Route::get('user/show/{id}', 'UserController@show');
+
+    Route::get('user/topic', 'UserController@getUserTopic');
+
+    //话题
+    Route::get('topic/index', 'TopicController@index');
+
+    Route::post('topic/store', 'TopicController@store');
+
+    Route::put('topic/update/{id}', 'TopicController@update');
+
+    Route::delete('topic/delete/{id}', 'TopicController@delete');
+
+    Route::get('topic/show/{id}', 'TopicController@show');
+
+    //公告
+    Route::get('notice/index', 'NoticeController@index');
+
+    Route::get('notice/show/{id}', 'NoticeController@show');
+
 });
 
 //后台路由组
@@ -43,25 +66,19 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     //后台index
     Route::get('/index', 'IndexController@index');
 
-    //话题列表
+    //话题
     Route::get('topic/index', 'TopicController@index');
 
-    //话题创建
     Route::post('topic/store', 'TopicController@store');
 
-    //话题更新
     Route::put('topic/update/{id}', 'TopicController@update');
 
-    //话题删除
     Route::delete('topic/delete/{id}', 'TopicController@delete');
 
-    //话题详情
     Route::get('topic/show/{id}', 'TopicController@show');
 
-    //话题发布
     Route::put('topic/publish/{id}', 'TopicController@publish');
 
-    //话题下线
     Route::put('topic/offline/{id}', 'TopicController@offline');
 
     //公告

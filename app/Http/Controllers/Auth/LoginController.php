@@ -57,7 +57,7 @@ class LoginController extends Controller
             ->first();
 
         if (! $user) {
-            throw new \Exception('用户名或密码错误');
+            throw new \Exception('手机号或密码错误');
         }
 
         session(['logined_id' => $user->id]);

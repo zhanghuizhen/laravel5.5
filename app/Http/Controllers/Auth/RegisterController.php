@@ -78,26 +78,16 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|string|max:25',
             'phone' => 'required|numeric',
-            'password' => 'required|string|max:10',
+            'password' => 'required|string',
         ],[
-            'username.required' => '用户名必填',
-            'username.string' => 'username 应是 string 类型',
-            'username.max' => '用户名最大长度为25位',
             'phone.required' => '手机号必填',
             'phone.string' => 'phone 应是 string 类型',
             'password.required' => '密码必填',
             'password.string' => 'password 应为 string 类型',
-            'password.max' => '密码最大长度为10位',
         ]);
 
-        $params = $request->only(['username', 'phone', 'password']);
-
-        $user_name_user = UserModel::where('username', $params['username'])->first();
-        if ($user_name_user) {
-            throw new \Exception('该用户名已被占用');
-        }
+        $params = $request->only(['phone', 'password']);
 
         $phone_user = UserModel::where('phone', $params['phone'])->first();
         if ($phone_user) {

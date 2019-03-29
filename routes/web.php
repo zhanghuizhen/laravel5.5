@@ -57,6 +57,11 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
 
     Route::get('notice/show/{id}', 'NoticeController@show');
 
+    //报事报修
+    Route::get('repair/index', 'RepairController@index');
+
+    Route::get('repair/show/{id}', 'RepairController@show');
+
 });
 
 //后台路由组
@@ -96,6 +101,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
     Route::get('notice/show/{id}', 'NoticeController@show');
 
+    //报事报修
+    Route::get('repair/index', 'RepairController@index');
+
+    Route::get('repair/show/{id}', 'RepairController@show');
 
 });
 

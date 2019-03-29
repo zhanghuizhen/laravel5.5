@@ -44,5 +44,52 @@ class RepairController extends Controller
         ]);
     }
 
+    //创建
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'part' => 'required|string',
+            'description' => 'required|string',
+            'address' => 'string',
+            'repair_time' => 'string',
+        ]);
+
+        $params = $request->only(['part', 'description', 'address', 'repair_time']);
+        $params['state'] = 'unfinished';
+
+        $user_id = session('logined_id');
+        $params['user_id'] = $user_id;
+
+        $repair_repo = new RepairRepo();
+        $repair = $repair_repo->store($params);
+
+        return Response::json([
+            'code' => 0,
+            'data' => $repair,
+        ]);
+    }
+
+    //更新
+    public function update($id, Request $request)
+    {
+        $this->validate($request, [
+            'part' => 'string',
+            'description' => 'string',
+            'address' => 'string',
+            'repair_time' => 'string',
+        ]);
+
+        $params = $request->only(['part', 'description', 'address', 'repair_time']);
+
+        $user_id = session('logined_id');
+        $params['user_id'] = $user_id;
+
+        $repair_repo = new RepairRepo();
+        $repair_repo->update($id, $params);
+
+        return Response::json([
+            'code' => 0,
+        ]);
+    }
 
 }

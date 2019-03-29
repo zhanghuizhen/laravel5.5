@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 class LogoutController extends Controller
 {
+    //注销
     public function logout(){
         $logined_id = session('logined_id');
 

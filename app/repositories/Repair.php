@@ -12,7 +12,7 @@ use App\Models\Repair as RepairModel;
 class Repair extends BaseRepo
 {
     //列表
-    public function getList($params)
+    public function getList($params = [])
     {
         $query = RepairModel::with('users');
 
@@ -57,8 +57,33 @@ class Repair extends BaseRepo
         return $repair;
     }
 
-    //
+    //创建
+    public function store($params)
+    {
+        $repair = RepairModel::create($params);
 
+        if (! $repair) {
+            throw new \Exception('id为' . $repair->id . '的数据创建失败');
+        }
 
+        return $repair;
+    }
+
+    //更新
+    public function update($id, $params)
+    {
+        $repair = RepairModel::find($id);
+
+        if (! $repair) {
+            throw new \Exception('id为' . $id . '的数据不存在');
+        }
+
+        //result 为 true or false
+        $result = $repair->update($params);
+
+        if (! $result) {
+            throw new \Exception('id为' . $id . '的数据更新失败');
+        }
+    }
 
 }

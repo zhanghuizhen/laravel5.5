@@ -62,6 +62,10 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
 
     Route::get('repair/show/{id}', 'RepairController@show');
 
+    Route::post('repair/store', 'RepairController@store');
+
+    Route::put('repair/update/{id}', 'RepairController@update');
+
 });
 
 //后台路由组

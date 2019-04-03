@@ -20,7 +20,7 @@ class CreateTopicsTable extends Migration
             $table->string('cover','255')->nullable(true)->comment('图片');
             $table->string('state', '56')->nullable(true)->comment('状态');
             $table->integer('user_id')->nullable(true)->comment('创建人ID');
-            $table->dateTime('published_at')->nullable()->comment('发布时间');
+            $table->dateTime('published_at')->nullable(true)->comment('发布时间');
             $table->timestamps();
         });
 

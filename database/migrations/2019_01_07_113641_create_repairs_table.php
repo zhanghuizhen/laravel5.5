@@ -18,11 +18,13 @@ class CreateRepairsTable extends Migration
             $table->string('part', '56')->nullable(true)->comment('哪部分的错误');
             $table->string('description', '255')->nullable(true)->comment('描述');
             $table->string('state', '56')->nullable(true)->comment('状态');
-            $table->string('is_finished', '56')->nullable(true)->comment('是否完成');
-            $table->string('address', '255')->nullable(true)->comment('地址');
-            $table->string('name', '56')->nullable(true)->comment('用户名');
+            $table->string('address', '255')->nullable(true)->comment('报修地址');
+            $table->string('username', '56')->nullable(true)->comment('用户名');
             $table->integer('user_id')->nullable(true)->comment('创建人ID');
-            $table->dateTime('published_at')->nullable()->comment('发布时间');
+            $table->string('image','255')->nullable(true)->comment('图片');
+            $table->dateTime('published_at')->nullable(true)->comment('发布时间');
+            $table->dateTime('repair_time')->nullable(true)->comment('上门维修时间');
+            $table->dateTime('finish_time')->nullable(true)->comment('完成时间');
             $table->timestamps();
         });
 

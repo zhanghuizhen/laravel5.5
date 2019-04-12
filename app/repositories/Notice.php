@@ -11,7 +11,7 @@ use App\Models\Notice as NoticeModel;
 class Notice extends BaseRepo
 {
     //列表
-    public function getList()
+    public function getList($params = [])
     {
         $query = NoticeModel::with('users');
 

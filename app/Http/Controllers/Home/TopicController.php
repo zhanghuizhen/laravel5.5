@@ -1,17 +1,29 @@
 <?php
+/**
+ * 前台话题接口
+ */
 
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\repositories\Topic as TopicRepo;
+use Response;
 
 class TopicController extends Controller
 {
     //列表
     public function index(Request $request)
     {
+        $this->validate($request, [
+            'state' => 'string',
+            'per_page' => 'numeric',
+        ]);
+
+        $params = $request->only('state', 'per_page');
+
         $topicRepo = new TopicRepo();
-        $list = $topicRepo->getList();
+        $list = $topicRepo->getList($params);
 
         return Response::json([
             'code' => 0,
@@ -37,6 +49,12 @@ class TopicController extends Controller
         $params = $request->only(['title', 'content', 'cover']);
         $params['state'] = 'published';
         $params['published_at'] = date('Y-m-d H:m:i');
+
+        $user_id = session('logined_id');
+        $params['user_id'] = $user_id;
+        if (empty($params)) {
+            $params['user_id'] = 1;
+        }
 
         $topicRepo = new TopicRepo();
         $topic = $topicRepo->store($params);

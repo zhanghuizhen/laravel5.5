@@ -78,20 +78,20 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'phone' => 'required|numeric',
+            'username' => 'required|string',
             'password' => 'required|string',
         ],[
-            'phone.required' => '手机号必填',
-            'phone.string' => 'phone 应是 string 类型',
+            'username.required' => '用户名必填',
+            'username.string' => 'username 应是 string 类型',
             'password.required' => '密码必填',
             'password.string' => 'password 应为 string 类型',
         ]);
 
-        $params = $request->only(['phone', 'password']);
+        $params = $request->only(['username', 'password']);
 
-        $phone_user = UserModel::where('phone', $params['phone'])->first();
-        if ($phone_user) {
-            throw new \Exception('该手机号已被注册');
+        $username_user = UserModel::where('username', $params['username'])->first();
+        if ($username_user) {
+            throw new \Exception('该用户名已被注册');
         }
 
         $params['password'] = md5($params['password']);

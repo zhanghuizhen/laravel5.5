@@ -18,6 +18,8 @@ class SuggestController extends Controller
             'content' => 'string',
             'state' => 'string',
             'type' => 'string',
+            'user_id' => 'numeric',
+            'anonymous' => 'string',
         ]);
 
         $params = $request->only(['id', 'content', 'state', 'type']);

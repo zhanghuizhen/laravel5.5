@@ -46,18 +46,18 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'phone' => 'required|numeric',
+            'username' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        $params = $request->only(['phone', 'password']);
+        $params = $request->only(['username', 'password']);
 
-        $user = UserModel::where('phone', $params['phone'])
+        $user = UserModel::where('username', $params['username'])
             ->where('password', md5($params['password']))
             ->first();
 
         if (! $user) {
-            throw new \Exception('手机号或密码错误');
+            throw new \Exception('用户名或密码错误');
         }
 
         session(['logined_id' => $user->id]);
@@ -66,10 +66,10 @@ class LoginController extends Controller
             throw new \Exception('id  session 存储失败');
         }
 
-        session(['logined_phone' => $params['phone']]);
-        $logined_phone = session('logined_phone');
-        if (! $logined_phone) {
-            throw new \Exception('phone session 存储失败');
+        session(['logined_username' => $params['username']]);
+        $logined_username = session('logined_username');
+        if (! $logined_username) {
+            throw new \Exception('username session 存储失败');
         }
 
         $user->update([
@@ -79,7 +79,8 @@ class LoginController extends Controller
         return Response::json([
             'code' => 0,
             'logined_id' => $logined_id,
-            'logined_phone' => $logined_phone,
+            'logined_username' => $logined_username,
+            'logined_at' => $user->logined_at,
         ]);
     }
 

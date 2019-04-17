@@ -47,14 +47,16 @@ class NoticeController extends Controller
         $this->validate($request, [
             'title' => 'required|string',
             'content' => 'required|string',
+            'cover' => 'string',
         ],[
             'title.required' => '小区公告标题必填',
             'title.string' => 'title 应为 string 类型',
             'content.required' => '社区广场内容必填',
             'content.string' => 'content 应是 string 类型',
+            'cover.string' => 'cover 应是 string类型',
         ]);
 
-        $params = $request->only(['title', 'content']);
+        $params = $request->only(['title', 'content', 'cover']);
         $params['state'] = 'published';
         $params['published_at'] = date('Y-m-d H:m:i');
 

@@ -44,11 +44,13 @@ class Topic extends BaseRepo
             $query->where('published_at', '<=', $params['publush_end_time']);
         }
 
-        $per_page = $this->defaultRerPage();
-        if (! empty($params['per_page'])) {
-            $per_page = $params['per_page'];
-        }
-        $list = $query->paginate($per_page);
+//        $per_page = $this->defaultRerPage();
+//        if (! empty($params['per_page'])) {
+//            $per_page = $params['per_page'];
+//        }
+//        $list = $query->paginate($per_page);
+
+        $list = $query->get();
 
         return $list;
     }

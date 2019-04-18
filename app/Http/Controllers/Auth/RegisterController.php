@@ -80,14 +80,13 @@ class RegisterController extends Controller
         $this->validate($request, [
             'username' => 'required|string',
             'password' => 'required|string',
-        ],[
-            'username.required' => '用户名必填',
-            'username.string' => 'username 应是 string 类型',
-            'password.required' => '密码必填',
-            'password.string' => 'password 应为 string 类型',
         ]);
 
         $params = $request->only(['username', 'password']);
+
+        if (! $params['username']) {
+
+        }
 
         $username_user = UserModel::where('username', $params['username'])->first();
         if ($username_user) {

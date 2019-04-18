@@ -46,7 +46,7 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
 
     Route::post('topic/store', 'TopicController@store');
 
-    Route::put('topic/update/{id}', 'TopicController@update');
+    Route::post('topic/update/{id}', 'TopicController@update');
 
     Route::delete('topic/delete/{id}', 'TopicController@delete');
 

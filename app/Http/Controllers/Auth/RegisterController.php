@@ -78,26 +78,41 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|string',
-            'password' => 'required|string',
+            'username' => 'string',
+            'password' => 'string',
+            're_password' => 'string',
         ]);
 
-        $params = $request->only(['username', 'password']);
+        $params = $request->only(['username', 'password', 're_password']);
 
-        if (! $params['username']) {
+        if (empty($params['username'])) {
+            return '用户名不能为空';
+        }
 
+        if (empty($params['password'])) {
+            return '密码不能为空';
+        }
+
+        if (empty($params['re_password'])) {
+            return '确认密码不能为空';
         }
 
         $username_user = UserModel::where('username', $params['username'])->first();
         if ($username_user) {
-            throw new \Exception('该用户名已被注册');
+            return '该用户名已被注册';
         }
+
+        if ($params['password'] != $params['re_password']) {
+            return '密码不一致';
+        }
+
+        unset($params['re_password']);
 
         $params['password'] = md5($params['password']);
 
         $user = UserModel::create($params);
         if (! $user) {
-            throw new \Exception('创建失败');
+            return '创建失败';
         }
 
         return Response::json([

@@ -46,30 +46,38 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|string',
-            'password' => 'required|string',
+            'username' => 'string',
+            'password' => 'string',
         ]);
 
         $params = $request->only(['username', 'password']);
+
+        if (empty($params['username'])) {
+            return '用户名不能为空';
+        }
+
+        if (empty($params['password'])) {
+            return '密码不能为空';
+        }
 
         $user = UserModel::where('username', $params['username'])
             ->where('password', md5($params['password']))
             ->first();
 
         if (! $user) {
-            throw new \Exception('用户名或密码错误');
+            return '用户名或密码错误';
         }
 
         session(['logined_id' => $user->id]);
         $logined_id = session('logined_id');
         if (! $logined_id) {
-            throw new \Exception('id  session 存储失败');
+            return 'id  session 存储失败';
         }
 
         session(['logined_username' => $params['username']]);
         $logined_username = session('logined_username');
         if (! $logined_username) {
-            throw new \Exception('username session 存储失败');
+            return 'username session 存储失败';
         }
 
         $user->update([

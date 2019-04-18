@@ -17,7 +17,7 @@ class LogoutController extends Controller
             ->first();
 
         if (! $user) {
-            throw new \Exception('用户不存在');
+            return '用户不存在';
         }
 
         $user->update([

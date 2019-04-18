@@ -11,18 +11,28 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     //编辑个人资料
-    public function edit($id, Request $request)
+    public function edit(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'string',
-            'avatar_url' => 'string',
-            'address' => 'string',
-        ]);
+        $params = $request->all(['id', 'introduction', 'avatar_url',
+            'address', 'phone', 'username', 'cover']);
 
-        $params = $request->only(['username', 'avatar_url', 'address']);
+        if (empty($params['id'])) {
+            return '用户id不能为空';
+        }
 
         $user_repo = new UserRepo();
-        $user_repo->edit($id, $params);
+
+        $user = $user_repo->getOne($params['id']);
+
+        if (empty($user)) {
+            return '用户不存在';
+        }
+
+        $result = $user_repo->edit($user, $params);
+
+        if (! $result) {
+            return '编辑个人资料失败';
+        }
 
         return Response::json([
             'code' => 0,
@@ -31,8 +41,14 @@ class UserController extends Controller
     }
 
     //查看个人资料
-    public function show($id)
+    public function show(Request $request)
     {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            return '用户id不能为空';
+        }
+
         $user_repo = new UserRepo();
         $user = $user_repo->getOne($id);
 
@@ -49,7 +65,7 @@ class UserController extends Controller
         if (empty($user_id)) {
             throw new \Exception('user_id为空');
         }
-//var_dump($user_id);die;
+
         $user_repo = new UserRepo();
         $topic = $user_repo->getUserTopic($user_id);
 

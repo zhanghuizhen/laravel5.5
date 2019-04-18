@@ -35,9 +35,9 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
     Route::get('/index', 'IndexController@index');
 
     //用户
-    Route::put('user/edit/{id}', 'UserController@edit');
+    Route::post('user/edit', 'UserController@edit');
 
-    Route::get('user/show/{id}', 'UserController@show');
+    Route::get('user/show', 'UserController@show');
 
     Route::get('user/topic', 'UserController@getUserTopic');
 

@@ -13,29 +13,17 @@ use App\Models\Topic as TopicModel;
 class User extends BaseRepo
 {
     //编辑个人资料
-    public function edit($id, $params)
+    public function edit($user, $params)
     {
-        $user = UserModel::find($id);
-
-        if (! $user) {
-            throw new \Exception('该用户不存在');
-        }
-
         $result = $user->update($params);
 
-        if (! $result) {
-            throw new \Exception('编辑个人资料失败');
-        }
+        return $result;
     }
 
     //获取指定id的数据详情
     public function getOne($id)
     {
         $user = UserModel::find($id);
-
-        if (! $user){
-            throw new \Exception('该用户不存在');
-        }
 
         return $user;
 

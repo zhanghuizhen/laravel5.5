@@ -58,10 +58,6 @@ class Notice extends BaseRepo
     {
         $notice = NoticeModel::with('users')->find($id);
 
-        if (! $notice) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         return $notice;
     }
 

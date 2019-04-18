@@ -50,7 +50,7 @@ class Topic extends BaseRepo
 //        }
 //        $list = $query->paginate($per_page);
 
-        $list = $query->get();
+        $list = $query->orderBy('published_at', 'desc')->get();
 
         return $list;
     }
@@ -60,10 +60,6 @@ class Topic extends BaseRepo
     {
         $topic = TopicModel::with('users')->find($id);
 
-        if (! $topic) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         return $topic;
     }
 
@@ -72,44 +68,24 @@ class Topic extends BaseRepo
     {
         $topic = TopicModel::create($params);
 
-        if (! $topic) {
-            throw new \Exception('id为' . $topic->id . '的数据创建失败');
-        }
-
         return $topic;
     }
 
     //更新
-    public function update($id, $params)
+    public function update($topic, $params)
     {
-        $topic = TopicModel::find($id);
-
-        if (! $topic) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         //result 为 true or false
         $result = $topic->update($params);
 
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
-        }
+        return $result;
     }
 
     //删除
-    public function delete($id)
+    public function delete($topic)
     {
-        $topic = TopicModel::find($id);
-
-        if (! $topic) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         $result = $topic->delete();
 
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据删除失败');
-        }
+        return $result;
     }
 
 }

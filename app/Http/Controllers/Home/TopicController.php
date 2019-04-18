@@ -15,12 +15,11 @@ class TopicController extends Controller
     //列表
     public function index(Request $request)
     {
-        $this->validate($request, [
-            'state' => 'string',
-            'per_page' => 'numeric',
-        ]);
+        $params = $request->all(['state', 'title', 'content']);
 
-        $params = $request->only('state', 'per_page');
+        if (empty($params['state'])) {
+            return '状态不能为空，应为published';
+        }
 
         $topicRepo = new TopicRepo();
         $list = $topicRepo->getList($params);
@@ -35,29 +34,37 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|string',
-            'content' => 'required|string',
+            'title' => 'string',
+            'content' => 'string',
             'cover' => 'url',
-        ],[
-            'title.required' => '社区广场标题必填',
-            'title.string' => 'title 应是 string 类型',
-            'content.required' => '社区广场内容必填',
-            'content.string' => 'content 应是 string 类型',
-            'cover.url' => 'cover 应是 url',
+            'user_id' => 'numeric',
         ]);
 
-        $params = $request->only(['title', 'content', 'cover']);
-        $params['state'] = 'published';
-        $params['published_at'] = date('Y-m-d H:m:i');
+        $params = $request->only(['title', 'content', 'cover', 'user_id']);
 
-        $user_id = session('logined_id');
-        $params['user_id'] = $user_id;
-        if (empty($params)) {
+        //$params = $request->all(['title', 'content', 'cover', 'user_id']);
+
+        if (empty($params['title'])) {
+            return '标题不能为空';
+        }
+
+        if (empty($params['content'])) {
+            return '内容不能为空';
+        }
+
+        if (empty($params['user_id'])) {
             $params['user_id'] = 1;
         }
 
+        $params['state'] = 'published';
+        $params['published_at'] = date('Y-m-d H:m:i');
+
         $topicRepo = new TopicRepo();
         $topic = $topicRepo->store($params);
+
+        if (! $topic) {
+            return '创建数据失败';
+        }
 
         return Response::json([
             'code' => 0,
@@ -66,24 +73,42 @@ class TopicController extends Controller
     }
 
     //更新
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'cover' => 'url',
-        ],[
-            'title.required' => '社区广场标题必填',
-            'title.string' => 'title 应是 string 类型',
-            'content.required' => '社区广场内容必填',
-            'content.string' => 'content 应是 string 类型',
-            'cover.url' => 'cover 应是 url',
+            'id' => 'numeric',
+            'title' => 'string',
+            'content' => 'string',
+            'cover' => 'string',
+            'user_id' => 'numeric',
         ]);
 
-        $params = $request->only(['title', 'content', 'cover']);
+        $params = $request->only(['id', 'title', 'content', 'cover', 'user_id']);
+
+        if (empty($params['id'])) {
+            return 'id不能为空';
+        }
 
         $topicRepo = new TopicRepo();
-        $topicRepo->update($id, $params);
+        $topic = $topicRepo->getOne($params['id']);
+
+        if (! $topic) {
+            return '数据不存在';
+        }
+
+        if (empty($params['title'])) {
+            return '标题不能为空';
+        }
+
+        if (empty($params['content'])) {
+            return '内容不能为空';
+        }
+
+        $result = $topicRepo->update($topic, $params);
+
+        if (! $result) {
+            return '更新失败';
+        }
 
         return Response::json([
             'code' => 0,
@@ -91,10 +116,26 @@ class TopicController extends Controller
     }
 
     //删除
-    public function delete($id)
+    public function delete(Request $request)
     {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            return 'id不能为空';
+        }
+
         $topicRepo = new TopicRepo();
-        $topicRepo->delete($id);
+        $topic = $topicRepo->getOne($id);
+
+        if (! $topic) {
+            return '数据不存在';
+        }
+
+        $result = $topicRepo->delete($topic);
+
+        if (! $result) {
+            return '数据删除失败';
+        }
 
         return Response::json([
             'code' => 0,
@@ -102,11 +143,21 @@ class TopicController extends Controller
     }
 
     //查看
-    public function show($id)
+    public function show(Request $request)
     {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            return 'id不能为空';
+        }
+
         $topicRepo = new TopicRepo();
 
         $topic = $topicRepo->getOne($id);
+
+        if (! $topic) {
+            return '数据不存在';
+        }
 
         return Response::json([
             'code' => 0,

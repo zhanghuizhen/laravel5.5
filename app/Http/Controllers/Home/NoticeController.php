@@ -13,10 +13,20 @@ use App\repositories\Notice as NoticeRepo;
 class NoticeController extends Controller
 {
     //详情
-    public function show($id)
+    public function show(Request $request)
     {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            return 'id不能为空';
+        }
+
         $noticeRepo = new NoticeRepo();
         $notice = $noticeRepo->getOne($id);
+
+        if (empty($notice)) {
+            return '数据不存在';
+        }
 
         return Response::json([
             'code' => 0,
@@ -29,10 +39,13 @@ class NoticeController extends Controller
     {
         $this->validate($request, [
             'state' => 'string',
-            'per_page' => 'numeric',
         ]);
 
-        $params = $request->only(['state', 'per_page']);
+        $params = $request->only(['state']);
+
+        if (empty($params['state'])) {
+            return '状态参数不能为空';
+        }
 
         $noticeRepo =new NoticeRepo();
         $list = $noticeRepo->getList($params);

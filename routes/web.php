@@ -46,16 +46,16 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
 
     Route::post('topic/store', 'TopicController@store');
 
-    Route::post('topic/update/{id}', 'TopicController@update');
+    Route::post('topic/update', 'TopicController@update');
 
-    Route::delete('topic/delete/{id}', 'TopicController@delete');
+    Route::post('topic/delete', 'TopicController@delete');
 
-    Route::get('topic/show/{id}', 'TopicController@show');
+    Route::get('topic/show', 'TopicController@show');
 
     //公告
     Route::get('notice/index', 'NoticeController@index');
 
-    Route::get('notice/show/{id}', 'NoticeController@show');
+    Route::get('notice/show', 'NoticeController@show');
 
     //报事报修
     Route::get('repair/index', 'RepairController@index');

@@ -15,7 +15,7 @@ class TopicController extends Controller
     //列表
     public function index(Request $request)
     {
-        $params = $request->all(['state', 'title', 'content']);
+        $params = $request->all(['state','content']);
 
         if (empty($params['state'])) {
             return '状态不能为空，应为published';
@@ -34,19 +34,14 @@ class TopicController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'string',
             'content' => 'string',
             'cover' => 'url',
             'user_id' => 'numeric',
         ]);
 
-        $params = $request->only(['title', 'content', 'cover', 'user_id']);
+        $params = $request->only(['content', 'cover', 'user_id']);
 
-        //$params = $request->all(['title', 'content', 'cover', 'user_id']);
-
-        if (empty($params['title'])) {
-            return '标题不能为空';
-        }
+        //$params = $request->all(['content', 'cover', 'user_id']);
 
         if (empty($params['content'])) {
             return '内容不能为空';
@@ -77,13 +72,12 @@ class TopicController extends Controller
     {
         $this->validate($request, [
             'id' => 'numeric',
-            'title' => 'string',
             'content' => 'string',
             'cover' => 'string',
             'user_id' => 'numeric',
         ]);
 
-        $params = $request->only(['id', 'title', 'content', 'cover', 'user_id']);
+        $params = $request->only(['id', 'content', 'cover', 'user_id']);
 
         if (empty($params['id'])) {
             return 'id不能为空';
@@ -94,10 +88,6 @@ class TopicController extends Controller
 
         if (! $topic) {
             return '数据不存在';
-        }
-
-        if (empty($params['title'])) {
-            return '标题不能为空';
         }
 
         if (empty($params['content'])) {

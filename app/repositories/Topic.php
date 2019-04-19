@@ -24,10 +24,6 @@ class Topic extends BaseRepo
             $query->where('user_id', $params['user_id']);
         }
 
-        if (! empty($params['title'])) {
-            $query->where('title', 'like', '%' . $params['title'] . '%');
-        }
-
         if (! empty($params['content'])) {
             $query->where('content', 'like', '%' . $params['content'] . '%');
         }
@@ -43,12 +39,6 @@ class Topic extends BaseRepo
         if (! empty($params['publish_end_time'])) {
             $query->where('published_at', '<=', $params['publush_end_time']);
         }
-
-//        $per_page = $this->defaultRerPage();
-//        if (! empty($params['per_page'])) {
-//            $per_page = $params['per_page'];
-//        }
-//        $list = $query->paginate($per_page);
 
         $list = $query->orderBy('published_at', 'desc')->get();
 

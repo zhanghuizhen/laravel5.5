@@ -60,11 +60,22 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
     //报事报修
     Route::get('repair/index', 'RepairController@index');
 
-    Route::get('repair/show/{id}', 'RepairController@show');
+    Route::get('repair/show', 'RepairController@show');
 
     Route::post('repair/store', 'RepairController@store');
 
-    Route::put('repair/update/{id}', 'RepairController@update');
+    Route::post('repair/update', 'RepairController@update');
+
+    //生活服务
+    Route::get('service/index', 'ServiceController@index');
+
+    Route::get('service/show', 'ServiceController@show');
+
+    Route::post('service/store', 'ServiceController@store');
+
+    Route::post('service/update', 'ServiceController@update');
+
+    Route::post('service/delete', 'ServiceController@delete');
 
 });
 

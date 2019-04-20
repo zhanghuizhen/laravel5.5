@@ -42,7 +42,7 @@ class Repair extends BaseRepo
 //        }
 //        $list = $query->paginate($per_page);
 
-        $list = $query->get();
+        $list = $query->orderBy('published_at', 'desc')->get();
 
         return $list;
     }
@@ -52,10 +52,6 @@ class Repair extends BaseRepo
     {
         $repair = RepairModel::with('users')->find($id);
 
-        if (! $repair) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         return $repair;
     }
 
@@ -64,28 +60,24 @@ class Repair extends BaseRepo
     {
         $repair = RepairModel::create($params);
 
-        if (! $repair) {
-            throw new \Exception('id为' . $repair->id . '的数据创建失败');
-        }
-
         return $repair;
     }
 
     //更新
-    public function update($id, $params)
+    public function update($repair, $params)
     {
-        $repair = RepairModel::find($id);
-
-        if (! $repair) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         //result 为 true or false
         $result = $repair->update($params);
 
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
-        }
+        return $result;
+    }
+
+    //删除
+    public function delete($repair)
+    {
+        $result = $repair->delete();
+
+        return $result;
     }
 
 }

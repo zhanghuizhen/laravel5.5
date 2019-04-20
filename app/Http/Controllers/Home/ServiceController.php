@@ -51,16 +51,16 @@ class ServiceController extends Controller
             return '到达时间不能为空';
         }
 
-        if ($params['type'] == 'express') {
-
-            if (empty($params['express_type'])) {
-                return '快递类型不能为空';
-            }
-
-            if (empty($params['express_num'])) {
-                return '快递单号不能为空';
-            }
-        }
+//        if ($params['type'] == 'express') {
+//
+//            if (empty($params['express_type'])) {
+//                return '快递类型不能为空';
+//            }
+//
+//            if (empty($params['express_num'])) {
+//                return '快递单号不能为空';
+//            }
+//        }
 
         $service_repo = new ServiceRepo();
         $service = $service_repo->store($params);
@@ -78,8 +78,7 @@ class ServiceController extends Controller
     //更新
     public function update(Request $request)
     {
-        $params = $request->all(['id','user_address', 'type', 'express_type', 'express_num',
-            'arrived_at', 'description', 'user_id']);
+        $params = $request->all(['id','user_address', 'type', 'arrived_at', 'description']);
 
         if (empty($params['id'])) {
             return '数据id不能为空';
@@ -90,10 +89,6 @@ class ServiceController extends Controller
 
         if (! $service) {
             return '数据不存在';
-        }
-
-        if (empty($params['user_id'])) {
-            $params['user_id'] = 1;
         }
 
         if (empty($params['type'])) {
@@ -108,16 +103,16 @@ class ServiceController extends Controller
             return '到达时间不能为空';
         }
 
-        if ($params['type'] == 'express') {
-
-            if (empty($params['express_type'])) {
-                return '快递类型不能为空';
-            }
-
-            if (empty($params['express_num'])) {
-                return '快递单号不能为空';
-            }
-        }
+//        if ($params['type'] == 'express') {
+//
+//            if (empty($params['express_type'])) {
+//                return '快递类型不能为空';
+//            }
+//
+//            if (empty($params['express_num'])) {
+//                return '快递单号不能为空';
+//            }
+//        }
 
         $result = $service_repo->update($service, $params);
 

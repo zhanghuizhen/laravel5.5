@@ -21,6 +21,6 @@ class Service extends Model
      */
     public function users()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id')->select(['id', 'username','avatar_url',]);
     }
 }

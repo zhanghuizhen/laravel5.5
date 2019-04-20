@@ -77,7 +77,7 @@ class TopicController extends Controller
             'user_id' => 'numeric',
         ]);
 
-        $params = $request->only(['id', 'content', 'cover', 'user_id']);
+        $params = $request->only(['id', 'content', 'cover']);
 
         if (empty($params['id'])) {
             return 'id不能为空';

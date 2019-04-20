@@ -12,16 +12,7 @@ class RepairController extends Controller
     //列表
     public function index(Request $request)
     {
-        $this->validate($request, [
-            'id' => 'numeric',
-            'user_id' => 'numeric',
-            'part' => 'string',
-            'state' => 'string',
-            'address' => 'string',
-            'per_page' => 'numeric',
-        ]);
-
-        $params = $request->only(['id', 'user_id', 'part', 'state', 'address', 'per_page']);
+        $params = $request->all(['user_id']);
 
         $repair_repo = new RepairRepo();
         $list = $repair_repo->getList($params);
@@ -33,10 +24,20 @@ class RepairController extends Controller
     }
 
     //详情
-    public function show($id)
+    public function show(Request $request)
     {
+        $id = $request->input('id');
+
+        if (empty($id)) {
+            return 'id不能为空';
+        }
+
         $repair_repo = new RepairRepo();
         $repair = $repair_repo->getOne($id);
+
+        if (! $repair) {
+            return '数据不存在';
+        }
 
         return Response::json([
             'code' => 0,
@@ -47,45 +48,93 @@ class RepairController extends Controller
     //创建
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'part' => 'required|string',
-            'description' => 'required|string',
-            'address' => 'string',
-            'repair_time' => 'string',
-        ]);
+        $params = $request->all(['address', 'part', 'repair_time', 'image','description',  'user_id']);
 
-        $params = $request->only(['part', 'description', 'address', 'repair_time']);
+        if (empty($params['address'])) {
+            return '报修地址不能为空';
+        }
+
+        if (empty($params['part'])) {
+            return '报修分类不能为空';
+        }
+
+        if (empty($params['repair_time'])) {
+            return '接待时间不能为空';
+        }
+
+        if (empty($params['user_id'])) {
+            $params['user_id'] = 1;
+        }
+
         $params['state'] = 'unfinished';
-
-        $user_id = session('logined_id');
-        $params['user_id'] = $user_id;
+        $params['published_at'] = date('Y-m-d H:m:i');
 
         $repair_repo = new RepairRepo();
         $repair = $repair_repo->store($params);
 
+        if (! $repair) {
+            return '创建失败';
+        }
+
         return Response::json([
             'code' => 0,
-            'data' => $repair,
         ]);
     }
 
     //更新
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
-        $this->validate($request, [
-            'part' => 'string',
-            'description' => 'string',
-            'address' => 'string',
-            'repair_time' => 'string',
-        ]);
+        $params = $request->all(['id', 'address', 'part', 'repair_time', 'image','description']);
 
-        $params = $request->only(['part', 'description', 'address', 'repair_time']);
-
-        $user_id = session('logined_id');
-        $params['user_id'] = $user_id;
+        if (empty($params['id'])) {
+            return '数据id不能为空';
+        }
 
         $repair_repo = new RepairRepo();
-        $repair_repo->update($id, $params);
+        $repair = $repair_repo->getOne($params['id']);
+        if (! $repair) {
+            return '数据不存在';
+        }
+
+        if (empty($params['address'])) {
+            return '报修地址不能为空';
+        }
+
+        if (empty($params['part'])) {
+            return '报修分类不能为空';
+        }
+
+        if (empty($params['repair_time'])) {
+            return '接待时间不能为空';
+        }
+
+        $result = $repair_repo->update($repair, $params);
+
+        if (! $result) {
+            return '更新失败';
+        }
+
+        return Response::json([
+            'code' => 0,
+        ]);
+    }
+
+    //删除
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
+
+        $repair_repo = new RepairRepo();
+
+        $repair = $repair_repo->getOne($id);
+        if (! $repair) {
+            return '数据不存在';
+        }
+
+        $result = $repair_repo->delete($repair);
+        if (! $result) {
+            return '删除失败';
+        }
 
         return Response::json([
             'code' => 0,

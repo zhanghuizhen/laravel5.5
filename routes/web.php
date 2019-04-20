@@ -66,6 +66,8 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
 
     Route::post('repair/update', 'RepairController@update');
 
+    Route::post('repair/delete', 'RepairController@delete');
+
     //生活服务
     Route::get('service/index', 'ServiceController@index');
 

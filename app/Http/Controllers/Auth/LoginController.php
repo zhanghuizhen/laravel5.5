@@ -52,13 +52,13 @@ class LoginController extends Controller
 
         $params = $request->only(['username', 'password']);
 
-//        if (empty($params['username'])) {
-//            return '用户名不能为空';
-//        }
-//
-//        if (empty($params['password'])) {
-//            return '密码不能为空';
-//        }
+        if (empty($params['username'])) {
+            return '用户名不能为空';
+        }
+
+        if (empty($params['password'])) {
+            return '密码不能为空';
+        }
 
         $user = UserModel::where('username', $params['username'])
             ->where('password', md5($params['password']))

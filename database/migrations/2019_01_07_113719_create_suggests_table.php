@@ -15,7 +15,7 @@ class CreateSuggestsTable extends Migration
     {
         Schema::create('suggests', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content', '255')->nullable(true)->comment('内容');
+            $table->string('description', '255')->nullable(true)->comment('问题描述');
             $table->string('type', '56')->nullable(true)->comment('意见/建议');
             $table->string('image','255')->nullable(true)->comment('图片');
             $table->string('address','255')->nullable(true)->comment('地址');

@@ -89,6 +89,17 @@ Route::group(['namespace' => 'Home', 'prefix' => 'home'], function(){
     Route::post('suggest/update', 'SuggestController@update');
 
     Route::post('suggest/delete', 'SuggestController@delete');
+
+    //评论
+    Route::get('comment/index', 'CommentController@index');
+
+    Route::get('comment/show', 'CommentController@show');
+
+    Route::post('comment/store', 'CommentController@store');
+
+    Route::post('comment/update', 'CommentController@update');
+
+    Route::post('comment/delete', 'CommentController@delete');
 });
 
 //后台路由组

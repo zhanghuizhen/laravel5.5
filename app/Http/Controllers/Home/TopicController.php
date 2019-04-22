@@ -35,7 +35,7 @@ class TopicController extends Controller
     {
         $this->validate($request, [
             'content' => 'string',
-            'cover' => 'url',
+            'cover' => 'string',
             'user_id' => 'numeric',
         ]);
 

@@ -5,15 +5,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\repositories\Comment as CommentRepo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
     //列表
-    public function index(Request $request)
+    public function index()
     {
+        $comment_repo = new CommentRepo();
 
+        $list = $comment_repo->getList();
+
+        return view('admin/comment/index', ['list' => $list]);
     }
 
     //创建

@@ -107,10 +107,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     // 控制器在 "App\Http\Controllers\Admin" 命名空间下
 
     //后台index
-    Route::get('/index', 'IndexController@index');
+    Route::get('/index', 'IndexController@index')->name('index');
 
     //话题
-    Route::get('topic/index', 'TopicController@index');
+    Route::get('topic/index', 'TopicController@index')->name('topic.index');
 
     Route::post('topic/store', 'TopicController@store');
 
@@ -125,7 +125,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::put('topic/offline/{id}', 'TopicController@offline');
 
     //公告
-    Route::get('notice/index', 'NoticeController@index');
+    Route::get('notice/index', 'NoticeController@index')->name('notice.index');
 
     Route::post('notice/store', 'NoticeController@store');
 
@@ -140,9 +140,21 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('notice/show/{id}', 'NoticeController@show');
 
     //报事报修
-    Route::get('repair/index', 'RepairController@index');
+    Route::get('repair/index', 'RepairController@index')->name('repair.index');
 
     Route::get('repair/show/{id}', 'RepairController@show');
+
+    //生活服务
+    Route::get('service/index', 'ServiceController@index')->name('service.index');
+
+    //评论
+    Route::get('comment/index', 'CommentController@index')->name('comment.index');
+
+    //投诉建议
+    Route::get('suggest/index', 'SuggestController@index')->name('suggest.index');
+
+    //用户
+    Route::get('user/index', 'UserController@index')->name('user.index');
 
 });
 

@@ -5,6 +5,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\repositories\User as UserRepo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +14,11 @@ class UserController extends Controller
     //列表
     public function index(Request $request)
     {
+        $user_repo = new UserRepo();
 
+        $list = $user_repo->getList();
+
+        return view('admin/user/index', ['list' => $list]);
     }
 
     //创建

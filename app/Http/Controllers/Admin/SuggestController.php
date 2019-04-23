@@ -12,5 +12,12 @@ use Response;
 
 class SuggestController extends Controller
 {
+    //列表
+    public function index()
+    {
+        $suggest_repo = new SuggestRepo();
+        $list = $suggest_repo->getList();
 
+        return view('admin/suggest/index', ['list' => $list]);
+    }
 }

@@ -30,9 +30,10 @@ class User extends BaseRepo
     }
 
     //获取用户列表
-    public function getList($params)
+    public function getList($params = [])
     {
-
+        $list = UserModel::all();
+        return $list;
     }
 
     //查看指定用户发表过的话题

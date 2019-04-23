@@ -19,27 +19,10 @@ class TopicController extends Controller
     //列表
     public function index(Request $request)
     {
-        $this->validate($request, [
-            'id' => 'numeric|min:1',
-            'user_id' => 'numeric|min:1',
-            'title' => 'string',
-            'content' => 'string',
-            'state' => 'string|in:published,offline',
-            'publish_start_time' => 'date',
-            'publish_end_time' => 'date',
-            'per_page' => 'numeric'
-        ]);
-
-        $params = $request->only(['id', 'user_id', 'title', 'content', 'state',
-            'publish_start_time', 'publish_end_time', 'per_page']);
-
         $topicRepo = new TopicRepo();
-        $list = $topicRepo->getList($params);
+        $list = $topicRepo->getList();
 
-        return Response::json([
-            'code' => 0,
-            'data' => $list,
-        ]);
+        return view('admin/topic/index', ['list' => $list ]);
     }
 
     //新建

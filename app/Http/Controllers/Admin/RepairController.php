@@ -15,24 +15,21 @@ class RepairController extends Controller
     //列表
     public function index(Request $request)
     {
-        $this->validate($request, [
-            'id' => 'numeric',
-            'user_id' => 'numeric',
-            'part' => 'string',
-            'state' => 'string',
-            'address' => 'string',
-            'per_page' => 'numeric',
-        ]);
-
-        $params = $request->only(['id', 'user_id', 'part', 'state', 'address', 'per_page']);
+//        $this->validate($request, [
+//            'id' => 'numeric',
+//            'user_id' => 'numeric',
+//            'part' => 'string',
+//            'state' => 'string',
+//            'address' => 'string',
+//            'per_page' => 'numeric',
+//        ]);
+//
+//        $params = $request->only(['id', 'user_id', 'part', 'state', 'address', 'per_page']);
 
         $repair_repo = new RepairRepo();
-        $list = $repair_repo->getList($params);
+        $list = $repair_repo->getList();
 
-        return Response::json([
-            'code' => 0,
-            'data' => $list,
-        ]);
+        return view('admin/repair/index', ['list' => $list ]);
     }
 
     //详情

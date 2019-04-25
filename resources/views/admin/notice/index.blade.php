@@ -18,12 +18,10 @@
                     <th>序号</th>
                     <th>标题</th>
                     <th>内容</th>
-                    <th>用户id</th>
+                    {{--<th>用户id</th>--}}
                     <th>地址</th>
                     <th>图片</th>
-
                     <th>状态</th>
-
                     <th>发布时间</th>
                     <th>操作</th>
                 </tr>
@@ -34,7 +32,7 @@
                     <td>{{$value->id}}</td>
                     <td>{{$value->title}}</td>
                     <td>{{$value->content}}</td>
-                    <td>{{$value->user_id}}</td>
+                    {{--<td>{{$value->user_id}}</td>--}}
                     <td>{{$value->address}}</td>
                     <td><img style="width:80px; height:50px" src="{{ $value->cover }}" alt=""> </td>
 
@@ -50,9 +48,9 @@
                         <div class="btn-group">
                             <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+                                <li><a href="{{url('admin/notice/edit', ['id' => $value->id])}}"><i class="icon-pencil"></i> 更新</a></li>
                                 <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
-                                <li><a href="#"><i class="icon-user"></i> Details</a></li>
+                                <li><a href="{{url('admin/notice/show', ['id' => $value->id])}}"><i class="icon-user"></i> 详情</a></li>
                                 <li class="nav-header">Permissions</li>
                                 <li><a href="#"><i class="icon-lock"></i> Make <strong>Admin</strong></a></li>
                                 <li><a href="#"><i class="icon-lock"></i> Make <strong>Moderator</strong></a></li>
@@ -65,9 +63,25 @@
             @endforeach
             </tbody>
         </table>
-
-
     </div>
+
+    {{ $list->links() }}
+
+    {{--<div class="pagination">--}}
+        {{--<ul>--}}
+            {{--<li><a href="#">Prev</a></li>--}}
+            {{--<li class="active">--}}
+                {{--<a href="#">1</a>--}}
+            {{--</li>--}}
+            {{--<li><a href="#">2</a></li>--}}
+            {{--<li><a href="#">3</a></li>--}}
+            {{--<li><a href="#">4</a></li>--}}
+            {{--<li><a href="#">Next</a></li>--}}
+        {{--</ul>--}}
+
+    {{--</div>--}}
+
+    <a href="{{url('admin/notice/create')}}" class="btn btn-success">New Notice</a>
 
 
 @endsection

@@ -90,8 +90,24 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-responsive.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/site.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{asset('js/bootstrap.js')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('js/bootstrap.min.js')}}">
+
 
     <meta charset="UTF-8">
+    <style>
+        .span9 table td{
+            text-align: center;
+            vertical-align:middle;
+        }
+
+
+    </style>
 </head>
 <body>
 @section('sidebar')
@@ -143,49 +159,24 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3">
-            <div class="well sidebar-nav">
-                {{--<ul class="nav nav-list">--}}
-                    {{--<li class="nav-header"><i class="icon-wrench"></i> 社区生活服务后台管理系统</li>--}}
-                    {{--<li class="active"><a href="users.html">Users</a></li>--}}
-                    {{--<li><a href="roles.html">Roles</a></li>--}}
-                    {{--<li class="nav-header"><i class="icon-signal"></i> Statistics</li>--}}
-                    {{--<li><a href="stats.html">General</a></li>--}}
-                    {{--<li><a href="user-stats.html">Users</a></li>--}}
-                    {{--<li><a href="visitor-stats.html">Visitors</a></li>--}}
-                    {{--<li class="nav-header"><i class="icon-user"></i> Profile</li>--}}
-                    {{--<li><a href="my-profile.html">My profile</a></li>--}}
-                    {{--<li><a href="#">Settings</a></li>--}}
-                    {{--<li><a href="#">Logout</a></li>--}}
-                {{--</ul>--}}
-
+        <div class="span3" style="height:400px">
+            <div class="well sidebar-nav" style="height:400px">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" class="success"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">Profile</a></li>
-                    <li role="presentation"><a href="#">Messages</a></li>
+                    <li role="presentation" class="success"><a href="#">主页</a></li>
+                    <li role="presentation"><a href="{{url('admin/user/index')}}">用户管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/notice/index')}}">小区公告管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/service/index')}}">生活服务管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/repair/index')}}">报修管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/suggest/index')}}">投诉建议管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/topic/index')}}">社区动态管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/comment/index')}}">评论管理</a></li>
                 </ul>
 
             </div>
         </div>
 
-        <div class="span9" >
+        <div class="span9">
             @yield('content')
-
-            <div class="pagination">
-                <ul>
-                    <li><a href="#">Prev</a></li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </div>
-
-            <a href="new-user.html" class="btn btn-success">New User</a>
-
         </div>
 
     </div>
@@ -199,9 +190,9 @@
 
     <hr>
 
-    <footer class="well">
-        @河北师范大学软件学院
-        <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+    <footer class="well" style="text-align: center">
+        社区服务管理系统
+        <a href="http://software.hebtu.edu.cn/" target="_blank" title="软件学院"> @河北师范大学软件学院</a>
     </footer>
 
 

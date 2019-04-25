@@ -32,61 +32,73 @@ class NoticeController extends Controller
 //        $params = $request->only(['id', 'title', 'content', 'state', 'user_id',
 //            'publish_start_time', 'publish_end_time', 'per_page']);
 
+        $params= [];
+        $params['per_page'] = 5;
+
         $noticeRepo =new NoticeRepo();
-        $list = $noticeRepo->getList();
+        $list = $noticeRepo->getList($params);
 
         return view('admin/notice/index', ['list' => $list ]);
+    }
+
+    //展示创建页面
+    public function create()
+    {
+        return view('admin/notice/create');
     }
 
     //创建
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required|string',
-            'content' => 'required|string',
-            'cover' => 'string',
-        ],[
-            'title.required' => '小区公告标题必填',
-            'title.string' => 'title 应为 string 类型',
-            'content.required' => '社区广场内容必填',
-            'content.string' => 'content 应是 string 类型',
-            'cover.string' => 'cover 应是 string类型',
-        ]);
+        $params = $request->all(['title', 'content', 'cover', 'address', 'user_id']);
 
-        $params = $request->only(['title', 'content', 'cover']);
         $params['state'] = 'published';
         $params['published_at'] = date('Y-m-d H:m:i');
 
         $noticeRepo = new NoticeRepo();
         $notice = $noticeRepo->store($params);
 
-        return Response::json([
-            'code' => 0,
-            'data' => $notice,
-        ]);
+        if (! $notice) {
+            return view('admin/notice/create');
+        }
+
+        return view('admin.index.index');
+    }
+
+    //展示更新页面
+    public function edit($id)
+    {
+        $noticeRepo = new NoticeRepo();
+
+        $notice = $noticeRepo->getOne($id);
+
+        if (! $notice) {
+            return '数据不存在';
+        }
+
+        return view('admin/notice/edit', ['data' => $notice]);
     }
 
     //更新
     public function update($id, Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required|string',
-            'content' => 'required|string',
-        ],[
-            'title.required' => '小区公告标题必填',
-            'title.string' => 'title 应为 string 类型',
-            'content.required' => '社区广场内容必填',
-            'content.string' => 'content 应是 string 类型',
-        ]);
-
-        $params = $request->only(['title', 'content']);
+        $params = $params = $request->all(['title', 'content', 'cover', 'address']);
 
         $noticeRepo = new NoticeRepo();
-        $noticeRepo->update($id, $params);
 
-        return Response::json([
-           'code' => 0,
-        ]);
+        $notice = $noticeRepo->getOne($id);
+
+        if (! $notice) {
+            return '数据不存在';
+        }
+
+        $result = $noticeRepo->update($notice, $params);
+
+        if (! $result) {
+            return view('admin/notice/update');
+        }
+
+        return view('admin.index.index');
     }
 
     //删除
@@ -106,10 +118,11 @@ class NoticeController extends Controller
         $noticeRepo = new NoticeRepo();
         $notice = $noticeRepo->getOne($id);
 
-        return Response::json([
-            'code' => 0,
-            'data' => $notice,
-        ]);
+        if (! $notice) {
+            return '数据不存在';
+        }
+
+        return view('admin/notice/show', ['data' => $notice]);
     }
 
     //发布

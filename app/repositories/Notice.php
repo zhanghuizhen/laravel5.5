@@ -43,11 +43,11 @@ class Notice extends BaseRepo
             $query->where('published_at', '<=', $params['publush_end_time']);
         }
 
-//        $per_page = $this->defaultRerPage();
-//        if (! empty($params['per_page'])) {
-//            $per_page = $params['per_page'];
-//        }
-//        $list = $query->paginate($per_page);
+        if (! empty($params['per_page'])) {
+            $list = $query->paginate($params['per_page']);
+            return $list;
+        }
+
 
         $list = $query->get();
         return $list;
@@ -66,44 +66,23 @@ class Notice extends BaseRepo
     {
         $notice = NoticeModel::create($params);
 
-        if (! $notice) {
-            throw new \Exception('id为' . $notice->id .'的数据创建失败');
-        }
-
         return $notice;
     }
 
     //更新
-    public function update($id, $params)
+    public function update($notice, $params)
     {
-        $notice = NoticeModel::find($id);
-
-        if (! $notice) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         $result = $notice->update($params);
 
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
-        }
+        return $result;
     }
 
     //删除
-    public function delete($id)
+    public function delete($notice)
     {
-        $notice = NoticeModel::find($id);
-
-        if (! $notice) {
-            throw new \Exception('id为' . $id . '的数据不存在');
-        }
-
         $result = $notice->delete();
 
-        if (! $result) {
-            throw new \Exception('id为' . $id .'的数据删除失败');
-        }
-
+        return $result;
     }
 
 }

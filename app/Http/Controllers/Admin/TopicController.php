@@ -108,25 +108,29 @@ class TopicController extends Controller
     //发布
     public function publish($id)
     {
+//        $id = $request->input('id');
+//
+//        if (empty($id)) {
+//            return '数据id不能为空';
+//        }
+
         $topic = TopicModel::find($id);
 
         if (! $topic) {
-            throw new \Exception('id为' . $id . '的社区广场数据不存在');
+            return '社区广场数据不存在';
         }
 
         if (! in_array($topic->state, ['offline', 'pre_published'])) {
-            throw new \Exception('id为' . $id . '的社区广场数据不是下线和待发布态，不能发布');
+            return 'id为' . $id . '的数据不是下线和待发布态，不能发布';
         }
 
         $result = $topic->update(['state' => 'published']);
 
         if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
+            return '数据更新失败';
         }
 
-        return Response::json([
-            'code' => 0,
-        ]);
+        return view('admin/topic/index', ['state' => $topic->state]);
     }
 
     //下线
@@ -135,22 +139,20 @@ class TopicController extends Controller
         $topic = TopicModel::find($id);
 
         if (! $topic) {
-            throw new \Exception('id为' . $id . '的社区广场数据不存在');
+            return '社区广场数据不存在';
         }
 
         if ($topic->state != 'published') {
-            throw new \Exception('id为' . $id . '的社区广场数据不是发布态，不能下线');
+            return 'id为' . $id . '的数据不是发布态，不能下线';
         }
 
-        $result = $topic->update(['state' => 'offline']);
+        $result = $topic->update(['state' => 'published']);
 
         if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
+            return '数据更新失败';
         }
 
-        return Response::json([
-            'code' => 0,
-        ]);
+        return view('admin/topic/index');
     }
 
 }

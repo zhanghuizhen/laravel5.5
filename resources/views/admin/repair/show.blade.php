@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '小区公告')
+@section('title', '报修')
 
 @section('sidebar')
     @parent
@@ -10,16 +10,16 @@
 
     <div class="row-fluid">
         <div class="page-header">
-            <h1>小区公告 <small>详情</small></h1>
+            <h1>报修 <small>详情</small></h1>
         </div>
         <table class="table table-striped" style="width: 500px">
             <tr>
-                <th>标题</th>
-                <td>{{$data->title}}</td>
+                <th>分类</th>
+                <td>{{$data->part}}</td>
             </tr>
             <tr>
-                <th>内容</th>
-                <td>{{$data->content}}</td>
+                <th>描述</th>
+                <td>{{$data->description}}</td>
             </tr>
             <tr>
                 <th>状态</th>
@@ -30,12 +30,20 @@
                 <td>{{$data->user_id}}</td>
             </tr>
             <tr>
-                <th>地址</th>
+                <th>报修地址</th>
                 <td>{{$data->address}}</td>
             </tr>
             <tr>
-                <th>图片</th>
-                <td><img style="width:80px; height:50px" src="{{ $data->cover }}" alt=""></td>
+                <th>相关图片</th>
+                <td><img style="width:80px; height:50px" src="{{ $data->image }}" alt=""></td>
+            </tr>
+            <tr>
+                <th>上门维修时间</th>
+                <td>{{$data->repair_time}}</td>
+            </tr>
+            <tr>
+                <th>完成时间</th>
+                <td>{{$data->finish_time}}</td>
             </tr>
             <tr>
                 <th>发布时间</th>

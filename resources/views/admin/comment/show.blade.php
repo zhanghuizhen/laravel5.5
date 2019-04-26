@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '小区公告')
+@section('title', '评论')
 
 @section('sidebar')
     @parent
@@ -10,33 +10,34 @@
 
     <div class="row-fluid">
         <div class="page-header">
-            <h1>小区公告 <small>详情</small></h1>
+            <h1>评论 <small>详情</small></h1>
         </div>
         <table class="table table-striped" style="width: 500px">
             <tr>
-                <th>标题</th>
-                <td>{{$data->title}}</td>
+                <th>评论内容</th>
+                <td>{{$data->content}}</td>
             </tr>
             <tr>
-                <th>内容</th>
-                <td>{{$data->content}}</td>
+                <th>根评论id</th>
+                <td>{{$data->root_id}}</td>
+            </tr>
+            <tr>
+                <th>父评论id</th>
+                <td>{{$data->parent_id}}</td>
             </tr>
             <tr>
                 <th>状态</th>
                 <td>{{$data->state}}</td>
             </tr>
             <tr>
-                <th>用户id</th>
+                <th>创建人id</th>
                 <td>{{$data->user_id}}</td>
             </tr>
             <tr>
-                <th>地址</th>
-                <td>{{$data->address}}</td>
+                <th>社区广场数据id</th>
+                <td>{{$data->topic_id}}</td>
             </tr>
-            <tr>
-                <th>图片</th>
-                <td><img style="width:80px; height:50px" src="{{ $data->cover }}" alt=""></td>
-            </tr>
+
             <tr>
                 <th>发布时间</th>
                 <td>{{$data->published_at}}</td>
@@ -53,5 +54,6 @@
     </div>
 
     <a href="{{url('admin/notice/index')}}" class="btn btn-success">返回列表</a>
+
 
 @endsection

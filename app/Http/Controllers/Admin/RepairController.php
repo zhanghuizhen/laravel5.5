@@ -38,22 +38,11 @@ class RepairController extends Controller
         $repair_repo = new RepairRepo();
         $repair = $repair_repo->getOne($id);
 
-        return Response::json([
-            'code' => 0,
-            'data' => $repair,
-        ]);
-    }
+        if (! $repair) {
+            return '数据不存在';
+        }
 
-    //创建
-    public function store(Request $request)
-    {
-
-    }
-
-    //更新
-    public function update($id)
-    {
-        echo 111;
+        return view('admin/repair/show', ['data' => $repair]);
     }
 
     //删除

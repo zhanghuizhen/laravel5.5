@@ -62,7 +62,7 @@ class NoticeController extends Controller
             return view('admin/notice/create');
         }
 
-        return view('admin.index.index');
+        return view('admin/notice/show', ['data' => $notice]);
     }
 
     //展示更新页面
@@ -98,18 +98,27 @@ class NoticeController extends Controller
             return view('admin/notice/update');
         }
 
-        return view('admin.index.index');
+        return view('admin.notice.show', ['data' => $notice]);
     }
 
     //删除
     public function delete($id)
     {
         $noticeRepo = new NoticeRepo();
-        $noticeRepo->delete($id);
 
-        return Response::json([
-            'code' => 0,
-        ]);
+        $notice = $noticeRepo->getOne($id);
+
+        if (! $notice) {
+            return '数据不存在';
+        }
+
+        $result = $noticeRepo->delete($notice);
+
+        if ($result) {
+            return 'ok';
+        }else{
+            return 'false';
+        }
     }
 
     //详情

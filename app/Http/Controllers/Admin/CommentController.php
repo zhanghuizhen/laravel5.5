@@ -20,23 +20,38 @@ class CommentController extends Controller
 
         return view('admin/comment/index', ['list' => $list]);
     }
-
-    //创建
-    public function store(Request $request)
+    //查看
+    public function show($id)
     {
+        $comment_repo = new CommentRepo();
 
-    }
+        $comment = $comment_repo->getOne($id);
 
-    //更新
-    public function update($id)
-    {
-        echo 111;
+        if (! $comment) {
+            return '数据不存在';
+        }
+
+        return view('admin/comment/show', ['data' => $comment]);
     }
 
     //删除
     public function delete($id)
     {
-        echo 111;
+        $comment_repo = new CommentRepo();
+
+        $comment = $comment_repo->getOne($id);
+
+        if (! $comment) {
+            return '数据不存在';
+        }
+
+        $result = $comment_repo->delete($comment);
+
+        if ($result) {
+            return 'ok';
+        }else{
+            return 'false';
+        }
     }
 
 }

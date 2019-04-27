@@ -37,9 +37,9 @@
                     <td><img style="width:80px; height:50px" src="{{ $value->cover }}" alt=""> </td>
 
                     @if ( $value->state == 'published' )
-                        <td> <span class="label label-success">发布</span> </td>
+                        <td> <span class="label label-success">已发布</span> </td>
                     @elseif ($value->state == 'offline')
-                        <td> <span class="label label-important">下线</span> </td>
+                        <td> <span class="label label-important">已下线</span> </td>
                     @endif
 
                     <td>{{$value->published_at}}</td>

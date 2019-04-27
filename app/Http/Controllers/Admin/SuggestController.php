@@ -20,4 +20,36 @@ class SuggestController extends Controller
 
         return view('admin/suggest/index', ['list' => $list]);
     }
+
+    //详情
+    public function show($id)
+    {
+        $suggest_repo = new SuggestRepo();
+        $suggest = $suggest_repo->getOne($id);
+
+        if (! $suggest) {
+            return '数据不存在';
+        }
+
+        return view('admin/suggest/show', ['data' => $suggest]);
+    }
+
+    //删除
+    public function delete($id)
+    {
+        $suggest_repo = new SuggestRepo();
+        $suggest = $suggest_repo->getOne($id);
+
+        if (! $suggest) {
+            return '数据不存在';
+        }
+
+        $result = $suggest_repo->delete($suggest);
+
+        if ($result) {
+            return 'ok';
+        }else{
+            return 'false';
+        }
+    }
 }

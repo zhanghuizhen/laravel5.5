@@ -22,8 +22,6 @@
                 <th>地址</th>
                 <th>背景图</th>
                 <th>简介</th>
-                {{--<th>登录时间</th>--}}
-                {{--<th>注销时间</th>--}}
                 <th>操作</th>
             </tr>
             </thead>
@@ -37,20 +35,12 @@
                     <td>{{$value->address}}</td>
                     <td><img style="width:80px; height:50px" src="{{ $value->cover }}" alt=""> </td>
                     <td>{{$value->introduction}}</td>
-                    {{--<td>{{$value->logined_at}}</td>--}}
-                    {{--<td>{{$value->logouted_at}}</td>--}}
 
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-                                <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
-                                <li><a href="#"><i class="icon-user"></i> Details</a></li>
-                                <li class="nav-header">Permissions</li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>Admin</strong></a></li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>Moderator</strong></a></li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>User</strong></a></li>
+                                <li><a href="{{url('admin/user/show', ['id' => $value->id])}}"><i class="icon-user"></i>详情</a></li>
                             </ul>
                         </div>
                     </td>

@@ -36,22 +36,17 @@
                     <td>{{$value->user_id}}</td>
 
                     @if ( $value->state == 'offline' )
-                        <td> <span class="label label-important">下线</span> </td>
+                        <td> <span class="label label-important">已下线</span> </td>
                     @elseif ($value->state == 'published')
-                        <td> <span class="label label-success">发布</span> </td>
+                        <td> <span class="label label-success">已发布</span> </td>
                     @endif
 
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-                                <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
-                                <li><a href="#"><i class="icon-user"></i> Details</a></li>
-                                <li class="nav-header">Permissions</li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>Admin</strong></a></li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>Moderator</strong></a></li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>User</strong></a></li>
+                                <li><a href="{{url('admin/suggest/show', ['id' => $value->id])}}"><i class="icon-user"></i> 详情</a></li>
+                                <li><a href="{{url('admin/suggest/delete', ['id' => $value->id])}}" onclick="deleteData(this); return false;"><i class="icon-trash"></i> 删除</a></li>
                             </ul>
                         </div>
                     </td>
@@ -59,9 +54,28 @@
             @endforeach
             </tbody>
         </table>
-
-
     </div>
 
-
+    <script>
+        function deleteData(obj)
+        {
+            target = obj;
+            if(confirm('您确认要删除该条信息吗？')){
+                $.ajax({
+                    url:$(obj).attr('href'),
+                    type:"DELETE",
+                    success:function(data){
+                        if(data=="ok"){
+                            alert('删除成功');
+                            //在页面中删除这个记录
+                            //target.parentNode.parentNode.parentNode.removeChild( target.parentNode.parentNode);
+                            window.location.reload();
+                        }else{
+                            alert('删除失败');
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 @endsection

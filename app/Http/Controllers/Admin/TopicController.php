@@ -85,11 +85,20 @@ class TopicController extends Controller
     public function delete($id)
     {
         $topicRepo = new TopicRepo();
-        $topicRepo->delete($id);
 
-        return Response::json([
-            'code' => 0,
-        ]);
+        $topic = $topicRepo->getOne($id);
+
+        if (! $topic) {
+            return '数据不存在';
+        }
+
+        $result = $topicRepo->delete($topic);
+
+        if ($result) {
+            return 'ok';
+        }else{
+            return 'false';
+        }
     }
 
     //查看
@@ -99,10 +108,11 @@ class TopicController extends Controller
 
         $topic = $topicRepo->getOne($id);
 
-        return Response::json([
-            'code' => 0,
-            'data' => $topic,
-        ]);
+        if (! $topic) {
+            return '数据不存在';
+        }
+
+        return view('admin/topic/show', ['data' => $topic]);
     }
 
     //发布

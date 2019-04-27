@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '小区公告')
+@section('title', '用户管理')
 
 @section('sidebar')
     @parent
@@ -10,40 +10,40 @@
 
     <div class="row-fluid">
         <div class="page-header">
-            <h1>小区公告 <small>详情</small></h1>
+            <h1>用户管理 <small>详情</small></h1>
         </div>
         <table class="table table-striped" style="width: 500px">
             <tr>
-                <th>标题</th>
-                <td>{{$data->title}}</td>
+                <th>用户名</th>
+                <td>{{$data->username}}</td>
             </tr>
             <tr>
-                <th>内容</th>
-                <td>{{$data->content}}</td>
+                <th>手机号</th>
+                <td>{{$data->phone}}</td>
             </tr>
             <tr>
-                <th>状态</th>
-                @if ( $data->state == 'published' )
-                    <td> 已发布</td>
-                @elseif ($data->state == 'offline')
-                    <td> 已下线</td>
-                @endif
+                <th>头像</th>
+                <td><img style="width:80px; height:50px" src="{{ $data->avatar_url }}" alt=""></td>
             </tr>
             <tr>
-                <th>用户id</th>
-                <td>{{$data->user_id}}</td>
-            </tr>
-            <tr>
-                <th>地址</th>
+                <th>家庭地址</th>
                 <td>{{$data->address}}</td>
             </tr>
             <tr>
-                <th>图片</th>
+                <th>背景图</th>
                 <td><img style="width:80px; height:50px" src="{{ $data->cover }}" alt=""></td>
             </tr>
             <tr>
-                <th>发布时间</th>
-                <td>{{$data->published_at}}</td>
+                <th>简介</th>
+                <td>{{$data->introduction}}</td>
+            </tr>
+            <tr>
+                <th>登录时间</th>
+                <td>{{$data->logined_at}}</td>
+            </tr>
+            <tr>
+                <th>注销时间</th>
+                <td>{{$data->logouted_at}}</td>
             </tr>
             <tr>
                 <th>创建时间</th>
@@ -56,6 +56,6 @@
         </table>
     </div>
 
-    <a href="{{url('admin/notice/index')}}" class="btn btn-success">返回列表</a>
+    <a href="{{url('admin/user/index')}}" class="btn btn-success">返回列表</a>
 
 @endsection

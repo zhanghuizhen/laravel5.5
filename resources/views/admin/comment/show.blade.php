@@ -28,9 +28,9 @@
             <tr>
                 <th>状态</th>
                 @if ( $data->state == 'published' )
-                    <td> 发布</td>
+                    <td> 已发布</td>
                 @elseif ($data->state == 'offline')
-                    <td> 下线</td>
+                    <td> 已下线</td>
                 @endif
             </tr>
             <tr>

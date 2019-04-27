@@ -39,4 +39,18 @@ class UserController extends Controller
         echo 111;
     }
 
+    //查看
+    public function show($id)
+    {
+        $user_repo = new UserRepo();
+
+        $user = $user_repo->getOne($id);
+
+        if (! $user) {
+            return '数据不存在';
+        }
+
+        return view('admin/user/show', ['data' => $user]);
+    }
+
 }

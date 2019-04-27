@@ -36,9 +36,9 @@
                     <td>{{$value->parent_id}}</td>
 
                     @if ( $value->state == 'published' )
-                        <td> <span class="label label-success">发布</span> </td>
+                        <td> <span class="label label-success">已发布</span> </td>
                     @elseif ($value->state == 'offline')
-                        <td> <span class="label label-important">下线</span> </td>
+                        <td> <span class="label label-important">已下线</span> </td>
                     @endif
 
                     <td>

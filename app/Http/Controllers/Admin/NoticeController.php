@@ -53,7 +53,7 @@ class NoticeController extends Controller
         $params = $request->all(['title', 'content', 'cover', 'address', 'user_id']);
 
         $params['state'] = 'published';
-        $params['published_at'] = date('Y-m-d H:m:i');
+        $params['published_at'] = date('Y-m-d H:i:s');
 
         $noticeRepo = new NoticeRepo();
         $notice = $noticeRepo->store($params);
@@ -140,22 +140,20 @@ class NoticeController extends Controller
         $notice = NoticeModel::find($id);
 
         if (! $notice) {
-            throw new \Exception('id为' . $id . '的数据不存在');
+            return '数据不存在';
         }
 
-        if (! in_array($notice->state, ['offline', 'pre_published'])) {
-            throw new \Exception('id为' . $id . '的数据不是下线和待发布态，不能发布');
+        if ($notice->state != 'offline') {
+            return 'id为' . $id . '的数据不是下线状态，不能发布';
         }
 
         $result = $notice->update(['state' => 'published']);
 
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
+        if ($result) {
+            return 'ok';
+        } else {
+            return 'false';
         }
-
-        return Response::json([
-            'code' => 0,
-        ]);
     }
 
     //下线
@@ -164,21 +162,19 @@ class NoticeController extends Controller
         $notice = NoticeModel::find($id);
 
         if (! $notice) {
-            throw new \Exception('id为' . $id . '的数据不存在');
+            return '数据不存在';
         }
 
         if ($notice->state != 'published') {
-            throw new \Exception('id为' . $id . '的数据不是发布态，不能下线');
+            return 'id为' . $id . '的数据不是发布态，不能下线';
         }
 
         $result = $notice->update(['state' => 'offline']);
 
-        if (! $result) {
-            throw new \Exception('id为' . $id . '的数据更新失败');
+        if ($result) {
+            return 'ok';
+        } else {
+            return 'false';
         }
-
-        return Response::json([
-            'code' => 0,
-        ]);
     }
 }

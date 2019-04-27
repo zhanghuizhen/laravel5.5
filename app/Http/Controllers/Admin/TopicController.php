@@ -118,29 +118,23 @@ class TopicController extends Controller
     //发布
     public function publish($id)
     {
-//        $id = $request->input('id');
-//
-//        if (empty($id)) {
-//            return '数据id不能为空';
-//        }
-
         $topic = TopicModel::find($id);
 
         if (! $topic) {
-            return '社区广场数据不存在';
+            return '数据不存在';
         }
 
-        if (! in_array($topic->state, ['offline', 'pre_published'])) {
-            return 'id为' . $id . '的数据不是下线和待发布态，不能发布';
+        if ($topic->state != 'offline') {
+            return 'id为' . $id . '的数据不是下线状态，不能发布';
         }
 
         $result = $topic->update(['state' => 'published']);
 
-        if (! $result) {
-            return '数据更新失败';
+        if ($result) {
+            return 'ok';
+        } else {
+            return 'false';
         }
-
-        return view('admin/topic/index', ['state' => $topic->state]);
     }
 
     //下线
@@ -149,20 +143,20 @@ class TopicController extends Controller
         $topic = TopicModel::find($id);
 
         if (! $topic) {
-            return '社区广场数据不存在';
+            return '数据不存在';
         }
 
         if ($topic->state != 'published') {
             return 'id为' . $id . '的数据不是发布态，不能下线';
         }
 
-        $result = $topic->update(['state' => 'published']);
+        $result = $topic->update(['state' => 'offline']);
 
-        if (! $result) {
-            return '数据更新失败';
+        if ($result) {
+            return 'ok';
+        } else {
+            return 'false';
         }
-
-        return view('admin/topic/index');
     }
 
 }

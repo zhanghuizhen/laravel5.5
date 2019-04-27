@@ -46,7 +46,7 @@ class SuggestController extends Controller
         }
 
         $params['state'] = 'published';
-        $params['published_at'] = date('Y-m-d H:m:i');
+        $params['published_at'] = date('Y-m-d H:i:s');
 
         $suggest_repo = new SuggestRepo();
         $suggest = $suggest_repo->store($params);

@@ -5,6 +5,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Comment as CommentModel;
 use App\repositories\Comment as CommentRepo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,7 @@ class CommentController extends Controller
 
         return view('admin/comment/index', ['list' => $list]);
     }
+
     //查看
     public function show($id)
     {
@@ -48,6 +50,50 @@ class CommentController extends Controller
         $result = $comment_repo->delete($comment);
 
         if ($result) {
+            return 'ok';
+        }else{
+            return 'false';
+        }
+    }
+
+    //发布
+    public function publish($id)
+    {
+        $comment = CommentModel::find($id);
+
+        if (! $comment) {
+            return '数据不存在';
+        }
+
+        if ($comment->state != 'offline') {
+            return 'id为' . $id . '的数据不是下线状态，不能发布';
+        }
+
+        $result = $comment->update(['state' => 'published']);
+
+        if ($result){
+            return 'ok';
+        }else{
+            return 'false';
+        }
+    }
+
+    //下线
+    public function offline($id)
+    {
+        $comment = CommentModel::find($id);
+
+        if (! $comment) {
+            return '数据不存在';
+        }
+
+        if ($comment->state != 'published') {
+            return 'id为' . $id . '的数据不是发布态，不能下线';
+        }
+
+        $result = $comment->update(['state' => 'offline']);
+
+        if ($result){
             return 'ok';
         }else{
             return 'false';

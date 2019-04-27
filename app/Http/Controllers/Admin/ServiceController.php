@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Service as ServiceModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\repositories\Service as ServiceRepo;
@@ -45,6 +46,28 @@ class ServiceController extends Controller
         if ($result) {
             return 'ok';
         }else{
+            return 'false';
+        }
+    }
+
+    //完成
+    public function finish($id)
+    {
+        $service = ServiceModel::find($id);
+
+        if (! $service) {
+            return '数据不存在';
+        }
+
+        if ($service->state != 'unfinished') {
+            return 'id为' . $id . '的数据不是未完成状态';
+        }
+
+        $result = $service->update(['state' => 'finish', 'finish_time' => date('Y-m-d H:i:s')]);
+
+        if ($result) {
+            return 'ok';
+        } else {
             return 'false';
         }
     }

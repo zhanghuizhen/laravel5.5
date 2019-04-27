@@ -33,7 +33,7 @@ class ServiceController extends Controller
             'arrived_at', 'description', 'user_id']);
 
         $params['state'] = 'unfinished';
-        $params['published_at'] = date('Y-m-d H:m:i');
+        $params['published_at'] = date('Y-m-d H:i:s');
 
         if (empty($params['user_id'])) {
             $params['user_id'] = 1;

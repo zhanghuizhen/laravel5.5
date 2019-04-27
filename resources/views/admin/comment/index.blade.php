@@ -47,7 +47,11 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{url('admin/comment/show', ['id' => $value->id])}}"><i class="icon-user"></i> 详情</a></li>
                                 <li><a href="{{url('admin/comment/delete', ['id' => $value->id])}}" onclick="deleteData(this); return false;"><i class="icon-trash"></i> 删除</a></li>
-                                <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+                                @if ( $value->state == 'published' )
+                                    <li><a href="{{url('admin/comment/offline', ['id' => $value->id])}}" onclick="offlineData(this); return false;"><i class="icon-pencil"></i> 下线</a></li>
+                                @elseif ($value->state == 'offline')
+                                    <li><a href="{{url('admin/comment/publish', ['id' => $value->id])}}" onclick="publishData(this); return false;"><i class="icon-pencil"></i> 发布</a></li>
+                                @endif
                             </ul>
                         </div>
                     </td>
@@ -63,7 +67,7 @@
         function deleteData(obj)
         {
             target = obj;
-            if(confirm('您确认要删除该条信息吗？')){
+            if(confirm('您确认要删除该条数据吗？')){
                 $.ajax({
                     url:$(obj).attr('href'),
                     type:"DELETE",
@@ -75,6 +79,46 @@
                             window.location.reload();
                         }else{
                             alert('删除失败');
+                        }
+                    }
+                });
+            }
+        }
+
+        function offlineData(obj)
+        {
+            target = obj;
+            if(confirm('您确认要下线该条数据吗？')){
+                $.ajax({
+                    url:$(obj).attr('href'),
+                    type:"PUT",
+                    success:function(data){
+                        if(data=="ok"){
+                            alert('下线成功');
+                            //刷新页面
+                            window.location.reload();
+                        }else{
+                            alert('下线失败');
+                        }
+                    }
+                });
+            }
+        }
+
+        function publishData(obj)
+        {
+            target = obj;
+            if(confirm('您确认要发布该条数据吗？')){
+                $.ajax({
+                    url:$(obj).attr('href'),
+                    type:"PUT",
+                    success:function(data){
+                        if(data=="ok"){
+                            alert('发布成功');
+                            //刷新页面
+                            window.location.reload();
+                        }else{
+                            alert('发布失败');
                         }
                     }
                 });

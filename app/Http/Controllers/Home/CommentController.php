@@ -34,7 +34,7 @@ class CommentController extends Controller
         $params = $request->all(['content', 'root_id', 'parent_id', 'user_id', 'topic_id']);
 
         $params['state'] = 'published';
-        $params['published_at'] = date('Y-m-d H:m:i');
+        $params['published_at'] = date('Y-m-d H:i:s');
 
         if (empty($params['user_id'])) {
             $params['user_id'] = 1;

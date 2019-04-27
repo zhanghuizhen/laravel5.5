@@ -52,7 +52,7 @@ class TopicController extends Controller
         }
 
         $params['state'] = 'published';
-        $params['published_at'] = date('Y-m-d H:m:i');
+        $params['published_at'] = date('Y-m-d H:i:s');
 
         $topicRepo = new TopicRepo();
         $topic = $topicRepo->store($params);

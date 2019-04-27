@@ -67,7 +67,7 @@ class RepairController extends Controller
         }
 
         $params['state'] = 'unfinished';
-        $params['published_at'] = date('Y-m-d H:m:i');
+        $params['published_at'] = date('Y-m-d H:i:s');
 
         $repair_repo = new RepairRepo();
         $repair = $repair_repo->store($params);

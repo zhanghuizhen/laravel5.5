@@ -56,6 +56,9 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{url('admin/service/show', ['id' => $value->id])}}"><i class="icon-user"></i> 详情</a></li>
                                 <li><a href="{{url('admin/service/delete', ['id' => $value->id])}}" onclick="deleteData(this); return false;"><i class="icon-trash"></i> 删除</a></li>
+                                @if ( $value->state == 'unfinished' )
+                                    <li><a href="{{url('admin/service/finish', ['id' => $value->id])}}" onclick="finishData(this); return false;"><i class="icon-pencil"></i> 完成</a></li>
+                                @endif
                             </ul>
                         </div>
                     </td>
@@ -81,6 +84,26 @@
                             window.location.reload();
                         }else{
                             alert('删除失败');
+                        }
+                    }
+                });
+            }
+        }
+
+        function finishData(obj)
+        {
+            target = obj;
+            if(confirm('您确认要点击完成吗？')){
+                $.ajax({
+                    url:$(obj).attr('href'),
+                    type:"PUT",
+                    success:function(data){
+                        if(data=="ok"){
+                            alert('点击成功');
+                            //刷新页面
+                            window.location.reload();
+                        }else{
+                            alert('点击失败');
                         }
                     }
                 });

@@ -15,17 +15,6 @@ class RepairController extends Controller
     //列表
     public function index(Request $request)
     {
-//        $this->validate($request, [
-//            'id' => 'numeric',
-//            'user_id' => 'numeric',
-//            'part' => 'string',
-//            'state' => 'string',
-//            'address' => 'string',
-//            'per_page' => 'numeric',
-//        ]);
-//
-//        $params = $request->only(['id', 'user_id', 'part', 'state', 'address', 'per_page']);
-
         $repair_repo = new RepairRepo();
         $list = $repair_repo->getList();
 
@@ -48,7 +37,20 @@ class RepairController extends Controller
     //删除
     public function delete($id)
     {
-        echo 111;
+        $repair_repo = new RepairRepo();
+        $repair = $repair_repo->getOne($id);
+
+        if (! $repair) {
+            return '数据不存在';
+        }
+
+        $result = $repair_repo->delete($repair);
+
+        if ($result) {
+            return 'ok';
+        }else{
+            return 'false';
+        }
     }
 
 }

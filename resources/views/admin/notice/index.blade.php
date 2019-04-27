@@ -51,10 +51,6 @@
                                 <li><a href="{{url('admin/notice/edit', ['id' => $value->id])}}"><i class="icon-pencil"></i> 更新</a></li>
                                 <li><a href="{{url('admin/notice/show', ['id' => $value->id])}}"><i class="icon-user"></i> 详情</a></li>
                                 <li><a href="{{url('admin/notice/delete', ['id' => $value->id])}}" onclick="deleteData(this); return false;"><i class="icon-trash"></i> 删除</a></li>
-                                <li class="nav-header">Permissions</li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>Admin</strong></a></li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>Moderator</strong></a></li>
-                                <li><a href="#"><i class="icon-lock"></i> Make <strong>User</strong></a></li>
                             </ul>
                         </div>
                     </td>

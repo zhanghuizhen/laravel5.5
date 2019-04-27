@@ -27,7 +27,11 @@
             </tr>
             <tr>
                 <th>状态</th>
-                <td>{{$data->state}}</td>
+                @if ( $data->state == 'published' )
+                    <td> 发布</td>
+                @elseif ($data->state == 'offline')
+                    <td> 下线</td>
+                @endif
             </tr>
             <tr>
                 <th>创建人id</th>
@@ -53,7 +57,7 @@
         </table>
     </div>
 
-    <a href="{{url('admin/notice/index')}}" class="btn btn-success">返回列表</a>
+    <a href="{{url('admin/comment/index')}}" class="btn btn-success">返回列表</a>
 
 
 @endsection

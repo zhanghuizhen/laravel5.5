@@ -23,7 +23,11 @@
             </tr>
             <tr>
                 <th>状态</th>
-                <td>{{$data->state}}</td>
+                @if ( $data->state == 'published' )
+                    <td> 发布</td>
+                @elseif ($data->state == 'offline')
+                    <td> 下线</td>
+                @endif
             </tr>
             <tr>
                 <th>用户id</th>

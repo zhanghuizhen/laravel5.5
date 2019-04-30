@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('address', '255')->nullable(true)->comment('用户地址');
             $table->string('cover', '255')->nullable(true)->comment('背景图片');
             $table->string('introduction', '255')->nullable(true)->comment('用户介绍');
+            $table->string('admin', '255')->nullable(true)->comment('是否为管理员');
             $table->dateTime('logined_at')->nullable(true)->comment('用户登录时间');
             $table->dateTime('logouted_at')->nullable(true)->comment('用户注销时间');
             $table->timestamps();

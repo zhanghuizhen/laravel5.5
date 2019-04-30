@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->integer('parent_id')->nullable(true)->comment('父评论');
             $table->string('state', '56')->nullable(true)->comment('状态');
             $table->integer('user_id')->nullable(true)->comment('创建人ID');
+            $table->integer('topic_id')->nullable(true)->comment('社区动态ID');
             $table->dateTime('published_at')->nullable(true)->comment('发布时间');
             $table->timestamps();
         });

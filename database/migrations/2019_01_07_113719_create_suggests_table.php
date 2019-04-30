@@ -22,6 +22,7 @@ class CreateSuggestsTable extends Migration
             $table->string('state', '56')->nullable(true)->comment('状态');
             $table->integer('user_id')->nullable(true)->comment('创建人ID');
             $table->dateTime('published_at')->nullable(true)->comment('发布时间');
+            $table->string('anonymous', '56')->nullable(true)->comment('是否匿名投诉');
             $table->timestamps();
         });
 

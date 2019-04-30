@@ -24,6 +24,7 @@ class CreateServicesTable extends Migration
             $table->string('state', '56')->nullable(true)->comment('状态');
             $table->integer('user_id')->nullable(true)->comment('创建人ID');
             $table->dateTime('published_at')->nullable(true)->comment('发布时间');
+            $table->dateTime('finish_time')->nullable(true)->comment('完成时间');
             $table->timestamps();
         });
     }

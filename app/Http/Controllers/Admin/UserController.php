@@ -5,6 +5,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User as UserModel;
 use App\repositories\User as UserRepo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,6 +52,24 @@ class UserController extends Controller
         }
 
         return view('admin/user/show', ['data' => $user]);
+    }
+
+    //设为管理员
+    public function setAdmin($id)
+    {
+        $user = UserModel::find($id);
+
+        if (! $user) {
+            return '数据不存在';
+        }
+
+        $result = $user->update(['admin' => 'yes']);
+
+        if ($result) {
+            return 'ok';
+        } else {
+            return 'false';
+        }
     }
 
 }

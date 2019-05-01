@@ -72,4 +72,22 @@ class UserController extends Controller
         }
     }
 
+    //取消管理员
+    public function cancelAdmin($id)
+    {
+        $user = UserModel::find($id);
+
+        if (! $user) {
+            return '数据不存在';
+        }
+
+        $result = $user->update(['admin' => 'no']);
+
+        if ($result) {
+            return 'ok';
+        } else {
+            return 'false';
+        }
+    }
+
 }

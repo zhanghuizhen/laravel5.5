@@ -27,9 +27,6 @@ class LogoutController extends Controller
         session(['logined_id' => null]);
         session(['logined_phone' => null]);
 
-        return Response::json([
-            'code' => 0,
-            'msg' => 'id为' . $logined_id . '的用户注销成功',
-        ]);
+        return view('welcome');
     }
 }

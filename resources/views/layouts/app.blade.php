@@ -122,45 +122,48 @@
                 <span class="icon-bar"></span>
             </a>
             <a class="brand" href="#">社区生活服务后台管理系统</a>
+
             <div class="btn-group pull-right">
-                <a class="btn" href="my-profile.html"><i class="icon-user"></i> Admin</a>
+                <a class="btn" href="my-profile.html"><i class="icon-user"></i> 欢迎您 {{session('logined_username')}}</a>
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="my-profile.html">Profile</a></li>
+                    <li><a href="{{url('admin/user/show', ['id' => session('logined_id')])}}">查看个人资料</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Sign Out</a></li>
+                    <li><a href="#">Logout</a></li>
                 </ul>
             </div>
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="new-user.html">New User</a></li>
-                            <li class="divider"></li>
-                            <li><a href="users.html">Manage Users</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Roles <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="new-role.html">New Role</a></li>
-                            <li class="divider"></li>
-                            <li><a href="roles.html">Manage Roles</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="stats.html">Stats</a></li>
-                </ul>
-            </div>
+
+            {{--<div class="nav-collapse">--}}
+                {{--<ul class="nav">--}}
+                    {{--<li><a href="index.html">Home</a></li>--}}
+                    {{--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>--}}
+                        {{--<ul class="dropdown-menu">--}}
+                            {{--<li><a href="new-user.html">New User</a></li>--}}
+                            {{--<li class="divider"></li>--}}
+                            {{--<li><a href="users.html">Manage Users</a></li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
+                    {{--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Roles <b class="caret"></b></a>--}}
+                        {{--<ul class="dropdown-menu">--}}
+                            {{--<li><a href="new-role.html">New Role</a></li>--}}
+                            {{--<li class="divider"></li>--}}
+                            {{--<li><a href="roles.html">Manage Roles</a></li>--}}
+                        {{--</ul>--}}
+                    {{--</li>--}}
+                    {{--<li><a href="stats.html">Stats</a></li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+
         </div>
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row-fluid">
+<div class="container-fluid" >
+    <div class="row-fluid" >
         <div class="span3" style="height:400px">
-            <div class="well sidebar-nav" style="height:400px">
+            <div class="well sidebar-nav" style="height:400px;background: white">
                 <ul class="nav nav-pills nav-stacked">
                     <li role="presentation" class="success"><a href="#">主页</a></li>
                     <li role="presentation"><a href="{{url('admin/user/index')}}">用户管理</a></li>

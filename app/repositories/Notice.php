@@ -49,7 +49,7 @@ class Notice extends BaseRepo
         }
 
 
-        $list = $query->get();
+        $list = $query->orderBy('published_at', 'desc')->get();
         return $list;
     }
 

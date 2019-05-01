@@ -22,6 +22,18 @@ class CommentController extends Controller
         return view('admin/comment/index', ['list' => $list]);
     }
 
+    //根据状态筛选
+    public function stateList($state)
+    {
+        $params['state'] = $state;
+
+        $comment_repo = new CommentRepo();
+
+        $list = $comment_repo->getList($params);
+
+        return view('admin/comment/index', ['list' => $list]);
+    }
+
     //查看
     public function show($id)
     {

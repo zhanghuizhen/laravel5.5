@@ -18,6 +18,17 @@ class ServiceController extends Controller
         return view('admin/service/index', ['list' => $list]);
     }
 
+    //根据状态筛选
+    public function stateList($state)
+    {
+        $params['state'] = $state;
+
+        $service_repo = new ServiceRepo();
+        $list = $service_repo->getList($params);
+
+        return view('admin/service/index', ['list' => $list]);
+    }
+
     //详情
     public function show($id)
     {

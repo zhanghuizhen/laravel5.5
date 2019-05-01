@@ -25,6 +25,17 @@ class TopicController extends Controller
         return view('admin/topic/index', ['list' => $list ]);
     }
 
+    //根据状态筛选
+    public function stateList($state)
+    {
+        $params['state'] = $state;
+
+        $topicRepo = new TopicRepo();
+        $list = $topicRepo->getList();
+
+        return view('admin/topic/index', ['list' => $list ]);
+    }
+
     //新建
     public function store(Request $request)
     {

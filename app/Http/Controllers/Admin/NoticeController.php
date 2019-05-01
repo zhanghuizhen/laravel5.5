@@ -18,22 +18,19 @@ class NoticeController extends Controller
     //列表
     public function index(Request $request)
     {
-//        $this->validate($request, [
-//            'id' => 'numeric|min:1',
-//            'title' => 'string',
-//            'content' => 'string',
-//            'state' => 'string',
-//            'user_id' => 'numeric|min:1',
-//            'publish_start_time' => 'date',
-//            'publish_end_time' => 'date',
-//            'per_page' => 'numeric',
-//        ]);
-//
-//        $params = $request->only(['id', 'title', 'content', 'state', 'user_id',
-//            'publish_start_time', 'publish_end_time', 'per_page']);
-
         $params= [];
         $params['per_page'] = 5;
+
+        $noticeRepo =new NoticeRepo();
+        $list = $noticeRepo->getList($params);
+
+        return view('admin/notice/index', ['list' => $list ]);
+    }
+
+    //根据状态筛选
+    public function stateList($state)
+    {
+        $params['state'] = $state;
 
         $noticeRepo =new NoticeRepo();
         $list = $noticeRepo->getList($params);

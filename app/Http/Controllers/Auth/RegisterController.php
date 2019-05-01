@@ -74,6 +74,58 @@ class RegisterController extends Controller
         ]);
     }
 
+    //展示注册页面
+    public function registerView()
+    {
+        return view('admin/auth/register');
+    }
+
+    //后台注册
+    public function adminRegister(Request $request)
+    {
+        $this->validate($request, [
+            'username' => 'string',
+            'password' => 'string',
+            're_password' => 'string',
+        ]);
+
+        $params = $request->only(['username', 'password', 're_password']);
+
+        if (empty($params['username'])) {
+            return '用户名不能为空';
+        }
+
+        if (empty($params['password'])) {
+            return '密码不能为空';
+        }
+
+        if (empty($params['re_password'])) {
+            return '确认密码不能为空';
+        }
+
+        $username_user = UserModel::where('username', $params['username'])->first();
+        if ($username_user) {
+            return '该用户名已被注册';
+        }
+
+        if ($params['password'] != $params['re_password']) {
+            return '密码不一致';
+        }
+
+        unset($params['re_password']);
+
+        $params['password'] = md5($params['password']);
+        $params['admin'] = 'yes';
+
+        $user = UserModel::create($params);
+        if (! $user) {
+            return '创建失败';
+        }
+
+        return redirect('auth/login');
+    }
+
+
     //重写注册
     public function register(Request $request)
     {
@@ -109,6 +161,7 @@ class RegisterController extends Controller
         unset($params['re_password']);
 
         $params['password'] = md5($params['password']);
+        $params['admin'] = 'no';
 
         $user = UserModel::create($params);
         if (! $user) {

@@ -42,6 +42,56 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    //展示登录页面
+    public function loginView()
+    {
+        return view('admin/auth/login');
+    }
+
+    //重写后台登录
+    public function adminLogin(Request $request)
+    {
+        $params = $request->all(['username', 'password']);
+
+        if (empty($params['username'])) {
+            return '用户名不能为空';
+        }
+
+        if (empty($params['password'])) {
+            return '密码不能为空';
+        }
+
+        $user = UserModel::where('username', $params['username'])
+            ->where('password', md5($params['password']))
+            ->first();
+
+        if (! $user) {
+            return '用户名或密码错误';
+        }
+
+        if ($user->admin != 'yes') {
+            return '该用户不是管理员';
+        }
+
+        session(['logined_id' => $user->id]);
+        $logined_id = session('logined_id');
+        if (! $logined_id) {
+            return 'id  session 存储失败';
+        }
+
+        session(['logined_username' => $params['username']]);
+        $logined_username = session('logined_username');
+        if (! $logined_username) {
+            return 'username session 存储失败';
+        }
+
+        $user->update([
+            'logined_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return redirect('admin/user/index');
+    }
+
     //重写登录
     public function login(Request $request)
     {

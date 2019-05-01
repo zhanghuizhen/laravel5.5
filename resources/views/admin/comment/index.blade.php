@@ -12,7 +12,20 @@
         <div class="page-header">
             <h1>评论 <small>列表</small></h1>
         </div>
-        <table class="table table-striped table-bordered table-condensed">
+
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                根据状态筛选
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{url('admin/comment/index')}}"><i class="icon-trash"></i> 全部</a></li>
+                <li><a href="{{url('admin/comment',['state' => 'published'])}}"><i class="icon-trash"></i> 发布</a></li>
+                <li><a href="{{url('admin/comment',['state' => 'offline'])}}"><i class="icon-trash"></i> 下线</a></li>
+            </ul>
+        </div>
+
+        <table class="table table-bordered" style="background: white;margin-top: 50px;">
             <thead>
             <tr>
                 <th>序号</th>
@@ -124,6 +137,7 @@
                 });
             }
         }
+
     </script>
 
 @endsection

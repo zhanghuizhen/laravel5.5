@@ -32,7 +32,10 @@ class User extends BaseRepo
     //获取用户列表
     public function getList($params = [])
     {
-        $list = UserModel::all();
+//        $list = UserModel::all();
+
+        $list = UserModel::orderBy('created_at', 'desc')->get();
+
         return $list;
     }
 

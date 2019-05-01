@@ -63,6 +63,8 @@
         </table>
     </div>
 
+    {{ $list->links() }}
+
     <script>
         function setData(obj)
         {

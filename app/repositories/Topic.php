@@ -40,6 +40,11 @@ class Topic extends BaseRepo
             $query->where('published_at', '<=', $params['publush_end_time']);
         }
 
+        if (! empty($params['per_page'])) {
+            $list = $query->orderBy('published_at', 'desc')->paginate($params['per_page']);
+            return $list;
+        }
+
         $list = $query->orderBy('published_at', 'desc')->get();
 
         return $list;

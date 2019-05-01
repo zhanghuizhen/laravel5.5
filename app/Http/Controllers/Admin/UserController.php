@@ -15,9 +15,12 @@ class UserController extends Controller
     //列表
     public function index(Request $request)
     {
+        $params= [];
+        $params['per_page'] = 10;
+
         $user_repo = new UserRepo();
 
-        $list = $user_repo->getList();
+        $list = $user_repo->getList($params);
 
         return view('admin/user/index', ['list' => $list]);
     }

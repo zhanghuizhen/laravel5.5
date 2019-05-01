@@ -19,8 +19,11 @@ class TopicController extends Controller
     //列表
     public function index(Request $request)
     {
+        $params= [];
+        $params['per_page'] = 10;
+
         $topicRepo = new TopicRepo();
-        $list = $topicRepo->getList();
+        $list = $topicRepo->getList($params);
 
         return view('admin/topic/index', ['list' => $list ]);
     }

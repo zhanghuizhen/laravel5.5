@@ -44,10 +44,9 @@ class Notice extends BaseRepo
         }
 
         if (! empty($params['per_page'])) {
-            $list = $query->paginate($params['per_page']);
+            $list = $query->orderBy('published_at', 'desc')->paginate($params['per_page']);
             return $list;
         }
-
 
         $list = $query->orderBy('published_at', 'desc')->get();
         return $list;

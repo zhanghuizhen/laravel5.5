@@ -32,6 +32,11 @@ class Suggest extends BaseRepo
             $query->where('type', $params['type']);
         }
 
+        if (! empty($params['per_page'])) {
+            $list = $query->orderBy('published_at', 'desc')->paginate($params['per_page']);
+            return $list;
+        }
+
         $list = $query->orderBy('published_at', 'desc')->get();
 
         return $list;

@@ -36,11 +36,10 @@ class Repair extends BaseRepo
             $query->where('address', 'like', '%' . $params['address'] . '%');
         }
 
-//        $per_page = $this->defaultRerPage();
-//        if (! empty($params['per_page'])) {
-//            $per_page = $params['per_page'];
-//        }
-//        $list = $query->paginate($per_page);
+        if (! empty($params['per_page'])) {
+            $list = $query->orderBy('published_at', 'desc')->paginate($params['per_page']);
+            return $list;
+        }
 
         $list = $query->orderBy('published_at', 'desc')->get();
 

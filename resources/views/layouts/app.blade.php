@@ -105,7 +105,14 @@
             text-align: center;
             vertical-align:middle;
         }
-
+        .span9 .pagination{
+            height:20px;
+        }
+        .span9 .pagination li{
+            float:left;
+            list-style-type: none;
+            width: 15px;
+        }
 
     </style>
 </head>
@@ -114,8 +121,8 @@
 @show
 
 <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
+    <div class="navbar-inner" >
+        <div class="container-fluid" >
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -178,7 +185,7 @@
             </div>
         </div>
 
-        <div class="span9">
+        <div class="span9" >
             @yield('content')
         </div>
 

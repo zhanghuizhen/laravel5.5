@@ -15,9 +15,12 @@ class CommentController extends Controller
     //列表
     public function index()
     {
+        $params= [];
+        $params['per_page'] = 10;
+
         $comment_repo = new CommentRepo();
 
-        $list = $comment_repo->getList();
+        $list = $comment_repo->getList($params);
 
         return view('admin/comment/index', ['list' => $list]);
     }

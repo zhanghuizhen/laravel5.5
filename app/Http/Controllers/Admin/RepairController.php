@@ -16,8 +16,11 @@ class RepairController extends Controller
     //列表
     public function index(Request $request)
     {
+        $params= [];
+        $params['per_page'] = 10;
+
         $repair_repo = new RepairRepo();
-        $list = $repair_repo->getList();
+        $list = $repair_repo->getList($params);
 
         return view('admin/repair/index', ['list' => $list ]);
     }

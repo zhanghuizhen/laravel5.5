@@ -15,8 +15,11 @@ class SuggestController extends Controller
     //列表
     public function index()
     {
+        $params= [];
+        $params['per_page'] = 10;
+
         $suggest_repo = new SuggestRepo();
-        $list = $suggest_repo->getList();
+        $list = $suggest_repo->getList($params);
 
         return view('admin/suggest/index', ['list' => $list]);
     }

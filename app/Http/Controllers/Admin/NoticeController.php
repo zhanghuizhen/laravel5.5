@@ -19,7 +19,7 @@ class NoticeController extends Controller
     public function index(Request $request)
     {
         $params= [];
-        $params['per_page'] = 5;
+        $params['per_page'] = 10;
 
         $noticeRepo =new NoticeRepo();
         $list = $noticeRepo->getList($params);

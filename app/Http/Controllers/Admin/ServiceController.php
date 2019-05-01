@@ -12,8 +12,11 @@ class ServiceController extends Controller
     //列表
     public function index()
     {
+        $params= [];
+        $params['per_page'] = 10;
+
         $service_repo = new ServiceRepo();
-        $list = $service_repo->getList();
+        $list = $service_repo->getList($params);
 
         return view('admin/service/index', ['list' => $list]);
     }

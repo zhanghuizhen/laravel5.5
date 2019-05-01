@@ -34,6 +34,11 @@ class User extends BaseRepo
     {
 //        $list = UserModel::all();
 
+        if (! empty($params['per_page'])) {
+            $list = UserModel::orderBy('created_at', 'desc')->paginate($params['per_page']);
+            return $list;
+        }
+
         $list = UserModel::orderBy('created_at', 'desc')->get();
 
         return $list;

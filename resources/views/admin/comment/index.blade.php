@@ -76,6 +76,8 @@
 
     </div>
 
+    {{ $list->links() }}
+
     <script>
         function deleteData(obj)
         {

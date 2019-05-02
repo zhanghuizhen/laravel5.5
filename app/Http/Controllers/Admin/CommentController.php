@@ -26,9 +26,25 @@ class CommentController extends Controller
     }
 
     //根据状态筛选
-    public function stateList($state)
+    public function getListByState($state)
     {
         $params['state'] = $state;
+        $params['per_page'] = 10;
+
+        $comment_repo = new CommentRepo();
+
+        $list = $comment_repo->getList($params);
+
+        //$list = CommentModel::where('state', $state)->get();
+
+        return view('admin/comment/index', ['list' => $list]);
+    }
+
+    //根据内容筛选
+    public function getListByContent(Request $request)
+    {
+        $params['content'] = $request->input('content');
+        $params['per_page'] = 10;
 
         $comment_repo = new CommentRepo();
 

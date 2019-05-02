@@ -25,6 +25,32 @@ class UserController extends Controller
         return view('admin/user/index', ['list' => $list]);
     }
 
+    //根据状态筛选
+    public function getListByAdmin($admin)
+    {
+        $params['admin'] = $admin;
+        $params['per_page'] = 10;
+
+        $user_repo = new UserRepo();
+
+        $list = $user_repo->getList($params);
+
+        return view('admin/user/index', ['list' => $list]);
+    }
+
+    //根据用户名筛选
+    public function getListByUsername(Request $request)
+    {
+        $params['username'] = $request->input('username');
+        $params['per_page'] = 10;
+
+        $user_repo = new UserRepo();
+
+        $list = $user_repo->getList($params);
+
+        return view('admin/user/index', ['list' => $list]);
+    }
+
     //创建
     public function store(Request $request)
     {

@@ -24,6 +24,30 @@ class SuggestController extends Controller
         return view('admin/suggest/index', ['list' => $list]);
     }
 
+    //根据状态筛选
+    public function getListByState($state)
+    {
+        $params['state'] = $state;
+        $params['per_page'] = 10;
+
+        $suggest_repo =new SuggestRepo();
+        $list = $suggest_repo->getList($params);
+
+        return view('admin/suggest/index', ['list' => $list ]);
+    }
+
+    //根据内容筛选
+    public function getListByDescription(Request $request)
+    {
+        $params['description'] = $request->input('description');
+        $params['per_page'] = 10;
+
+        $suggest_repo = new SuggestRepo();
+        $list = $suggest_repo->getList($params);
+
+        return view('admin/suggest/index', ['list' => $list]);
+    }
+
     //详情
     public function show($id)
     {

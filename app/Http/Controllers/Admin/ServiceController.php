@@ -22,9 +22,22 @@ class ServiceController extends Controller
     }
 
     //根据状态筛选
-    public function stateList($state)
+    public function getListByState($state)
     {
         $params['state'] = $state;
+        $params['per_page'] = 10;
+
+        $service_repo = new ServiceRepo();
+        $list = $service_repo->getList($params);
+
+        return view('admin/service/index', ['list' => $list]);
+    }
+
+    //根据类型筛选
+    public function getListByType($type)
+    {
+        $params['type'] = $type;
+        $params['per_page'] = 10;
 
         $service_repo = new ServiceRepo();
         $list = $service_repo->getList($params);

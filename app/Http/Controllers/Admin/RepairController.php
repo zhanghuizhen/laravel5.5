@@ -26,15 +26,30 @@ class RepairController extends Controller
     }
 
     //根据状态筛选
-    public function stateList($state)
+    public function getListByState($state)
     {
         $params['state'] = $state;
+        $params['per_page'] = 10;
 
         $repair_repo = new RepairRepo();
         $list = $repair_repo->getList($params);
 
         return view('admin/repair/index', ['list' => $list ]);
     }
+
+    //根据分类筛选
+    public function getListByPart(Request $request)
+    {
+        $params['part'] = $request->input('part');
+        $params['per_page'] = 10;
+
+        $repair_repo = new RepairRepo();
+
+        $list = $repair_repo->getList($params);
+
+        return view('admin/repair/index', ['list' => $list]);
+    }
+
 
     //详情
     public function show($id)

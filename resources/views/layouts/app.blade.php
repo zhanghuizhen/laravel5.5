@@ -113,33 +113,44 @@
             list-style-type: none;
             width: 15px;
         }
+        .one {
+            color: #333333;
+        }
+
+        .one:hover{
+            font-size: 15px;
+        }
 
     </style>
 </head>
 <body>
 @section('sidebar')
 @show
-
+{{--style="background-color: rgba(255,160,0,1)--}}
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner" >
-        <div class="container-fluid" >
+        <div class="container-fluid">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">社区生活服务后台管理系统</a>
-
+            <a class="brand" href="#" style="color: white">社区生活服务后台管理系统</a>
             <div class="btn-group pull-right">
-                <a class="btn" href="my-profile.html"><i class="icon-user"></i> 欢迎您 {{session('logined_username')}}</a>
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{url('admin/user/show', ['id' => session('logined_id')])}}">查看个人资料</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
+                {{--<a class="btn" href="my-profile.html"><i class="icon-user"></i> 欢迎您 {{session('logined_username')}}</a>--}}
+                {{--<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">--}}
+                    {{--<span class="caret"></span>--}}
+                {{--</a>--}}
+                {{--<ul class="dropdown-menu">--}}
+                    {{--<li><a href="{{url('admin/user/show', ['id' => session('logined_id')])}}">查看个人资料</a></li>--}}
+                    {{--<li class="divider"></li>--}}
+                    {{--<li><a href="#">Logout</a></li>--}}
+                {{--</ul>--}}
+
+                <span style="color:white;">欢迎您 {{session('logined_username')}}</span>
+
+                <span style="margin-left:20px"><a href="#" style="color: white">Logout</a></span>
+
             </div>
 
             {{--<div class="nav-collapse">--}}
@@ -169,17 +180,17 @@
 
 <div class="container-fluid" >
     <div class="row-fluid" >
-        <div class="span3" style="height:400px">
+        <div class="span3" >
             <div class="well sidebar-nav" style="height:400px;background: white">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" class="success"><a href="#">主页</a></li>
-                    <li role="presentation"><a href="{{url('admin/user/index')}}">用户管理</a></li>
-                    <li role="presentation"><a href="{{url('admin/notice/index')}}">小区公告管理</a></li>
-                    <li role="presentation"><a href="{{url('admin/service/index')}}">生活服务管理</a></li>
-                    <li role="presentation"><a href="{{url('admin/repair/index')}}">报修管理</a></li>
-                    <li role="presentation"><a href="{{url('admin/suggest/index')}}">投诉建议管理</a></li>
-                    <li role="presentation"><a href="{{url('admin/topic/index')}}">社区动态管理</a></li>
-                    <li role="presentation"><a href="{{url('admin/comment/index')}}">评论管理</a></li>
+                    <li role="presentation"><a href="#">主页</a></li>
+                    <li role="presentation"><a href="{{url('admin/user/index')}}" class="one">用户管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/notice/index')}}" class="one">小区公告管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/service/index')}}" class="one">生活服务管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/repair/index')}}" class="one">报修管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/suggest/index')}}" class="one">投诉建议管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/topic/index')}}" class="one">社区动态管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/comment/index')}}" class="one">评论管理</a></li>
                 </ul>
 
             </div>

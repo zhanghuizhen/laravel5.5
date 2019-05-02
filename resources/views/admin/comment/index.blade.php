@@ -23,9 +23,15 @@
                 <li><a href="{{url('admin/comment',['state' => 'published'])}}"><i class="icon-trash"></i> 发布</a></li>
                 <li><a href="{{url('admin/comment',['state' => 'offline'])}}"><i class="icon-trash"></i> 下线</a></li>
             </ul>
+
+            <form class="form-search"  action="{{ url('admin/comment/content') }}" method="POST" style="margin-left: 150px" >
+                <input type="text" class="input-medium search-query" name="content">
+                <button type="submit" class="btn">根据内容筛选</button>
+            </form>
+
         </div>
 
-        <table class="table table-bordered" style="background: white;margin-top: 50px;">
+        <table class="table table-bordered" style="background: white;">
             <thead>
             <tr>
                 <th>序号</th>
@@ -76,7 +82,7 @@
 
     </div>
 
-    {{ $list->links() }}
+    {{--{{ $list->links() }}--}}
 
     <script>
         function deleteData(obj)

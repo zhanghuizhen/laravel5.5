@@ -12,7 +12,25 @@
         <div class="page-header">
             <h1>报修 <small>列表</small></h1>
         </div>
-        <table class="table table-striped table-bordered table-condensed">
+
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                根据状态筛选
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{url('admin/repair/index')}}"><i class="icon-trash"></i> 全部</a></li>
+                <li><a href="{{url('admin/repair',['state' => 'finish'])}}"><i class="icon-trash"></i> 完成</a></li>
+                <li><a href="{{url('admin/repair',['state' => 'unfinished'])}}"><i class="icon-trash"></i> 未完成</a></li>
+            </ul>
+
+            <form class="form-search"  action="{{ url('admin/repair/part') }}" method="POST" style="margin-left: 150px" >
+                <input type="text" class="input-medium search-query" name="part">
+                <button type="submit" class="btn">根据分类筛选</button>
+            </form>
+        </div>
+
+        <table class="table table-bordered" style="background: white;">
             <thead>
             <tr>
                 <th>序号</th>

@@ -32,10 +32,18 @@ class User extends BaseRepo
     //获取用户列表
     public function getList($params = [])
     {
-//        $list = UserModel::all();
+        $query = UserModel::orderBy('created_at', 'desc');
+
+        if (! empty($params['username'])) {
+            $query->where('username', 'like','%' . $params['username'] . '%');
+        }
+
+        if (! empty($params['admin'])) {
+            $query->where('admin',$params['admin']);
+        }
 
         if (! empty($params['per_page'])) {
-            $list = UserModel::orderBy('created_at', 'desc')->paginate($params['per_page']);
+            $list = $query->paginate($params['per_page']);
             return $list;
         }
 

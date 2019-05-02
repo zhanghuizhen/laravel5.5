@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Notice as NoticeModel;
 use App\repositories\Notice as NoticeRepo;
+use Illuminate\Support\Facades\Storage;
 
 class NoticeController extends Controller
 {
@@ -28,9 +29,10 @@ class NoticeController extends Controller
     }
 
     //根据状态筛选
-    public function stateList($state)
+    public function getListByState($state)
     {
         $params['state'] = $state;
+        $params['per_page'] = 10;
 
         $noticeRepo =new NoticeRepo();
         $list = $noticeRepo->getList($params);
@@ -38,11 +40,29 @@ class NoticeController extends Controller
         return view('admin/notice/index', ['list' => $list ]);
     }
 
-    //展示创建页面
-    public function create()
+    //根据内容筛选
+    public function getListByContent(Request $request)
     {
-        return view('admin/notice/create');
+        $params['content'] = $request->input('content');
+        $params['per_page'] = 10;
+
+        $notice_repo = new NoticeRepo();
+        $list = $notice_repo->getList($params);
+
+        return view('admin/notice/index', ['list' => $list]);
     }
+
+    public function showCreate()
+    {
+        return view('admin.notice.create');
+
+    }
+
+//    //展示创建页面
+//    public function create()
+//    {
+//        return view('admin.notice.create');
+//    }
 
     //创建
     public function store(Request $request)
@@ -55,12 +75,38 @@ class NoticeController extends Controller
         $noticeRepo = new NoticeRepo();
         $notice = $noticeRepo->store($params);
 
+        $user_id = session('logined_id');
+        if (empty($user_id)) {
+            $params['user_id'] = 1;
+        } else {
+            $params['user_id'] = session('logined_id');
+        }
+
         if (! $notice) {
             return view('admin/notice/create');
         }
 
         return view('admin/notice/show', ['data' => $notice]);
     }
+
+    //文件上传
+    public function upload(Request $request)
+    {
+        $path = Storage::putFile('',$request->file('file'));
+        $aResponse = [
+            "message"=>'上传成功',
+            "status_code"=>200,
+        ];
+        if ($path){
+            //$aResponse['image'] = 'http://140.143.75.82:81/images/'.$path;
+            $aResponse['image'] = 'http://localhost/img/'.$path;
+            return response()->json($aResponse);
+        }else{
+            $aResponse['message'] = '上传失败';
+            return response()->json($aResponse);
+        }
+    }
+
 
     //展示更新页面
     public function edit($id)

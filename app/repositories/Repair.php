@@ -25,7 +25,7 @@ class Repair extends BaseRepo
         }
 
         if (! empty($params['part'])) {
-            $query->where('title', 'like', '%' . $params['title'] . '%');
+            $query->where('part', 'like', '%' . $params['part'] . '%');
         }
 
         if (! empty($params['state'])) {

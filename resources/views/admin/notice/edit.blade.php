@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1>小区公告 <small>更新</small></h1>
         </div>
-        <form class="form-horizontal" action="{{ url('admin/notice/update',['id' => $data->id]) }}" method="POST">
+        <form class="form-horizontal" action="{{ url('admin/notice/update',['id' => $data->id]) }}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             <fieldset>
                 <div class="control-group">

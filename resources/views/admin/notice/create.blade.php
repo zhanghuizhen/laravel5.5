@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1>小区公告 <small>创建</small></h1>
         </div>
-        <form class="form-horizontal" action="{{ url('admin/notice/store') }}" method="POST">
+        <form class="form-horizontal" action="{{ url('admin/notice/store') }}" method="POST" enctype="multipart/form-data">
             {{csrf_field()}}
             <fieldset>
                 <div class="control-group">
@@ -36,12 +36,14 @@
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="cover">图片</label>
-                    <div class="controls">
-                        <input type="file" name="cover">
+                <form action="{{ url('admin/notice/upload') }}" method="POST">
+                    <div class="control-group">
+                        <label class="control-label" for="cover">图片</label>
+                        <div class="controls">
+                            <input type="file" name="cover" />
+                        </div>
                     </div>
-                </div>
+                </form>
 
                 <div class="form-actions">
                     <input type="submit" class="btn btn-success btn-large" value="创建" /> <a class="btn" href="{{url('admin/notice/index')}}">取消</a>

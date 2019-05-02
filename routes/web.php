@@ -115,7 +115,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
     //话题
     Route::get('topic/index', 'TopicController@index');
-    Route::get('topic/{state}', 'TopicController@stateList');
+    Route::get('topic/{state}', 'TopicController@getListByState');
+    Route::post('topic/content', 'TopicController@getListByContent');
 
     Route::delete('topic/delete/{id}', 'TopicController@delete');
     Route::get('topic/show/{id}', 'TopicController@show');
@@ -126,10 +127,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
     //公告
     Route::get('notice/index', 'NoticeController@index');
-    Route::get('notice/{state}', 'NoticeController@stateList');
+    Route::get('notice/create', 'NoticeController@showCreate');
 
-    Route::get('notice/create', 'NoticeController@create');
+    Route::get('notice/{state}', 'NoticeController@getListByState');
+    Route::post('notice/content', 'NoticeController@getListByContent');
+
     Route::post('notice/store', 'NoticeController@store');
+    Route::post('notice/upload', 'NoticeController@upload');
 
     Route::get('notice/edit/{id}', 'NoticeController@edit');
     Route::post('notice/update/{id}', 'NoticeController@update');
@@ -143,7 +147,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
     //报事报修
     Route::get('repair/index', 'RepairController@index');
-    Route::get('repair/{state}', 'RepairController@stateList');
+    Route::get('repair/{state}', 'RepairController@getListByState');
+    Route::post('repair/part', 'RepairController@getListByPart');
 
     Route::get('repair/show/{id}', 'RepairController@show');
     Route::delete('repair/delete/{id}', 'RepairController@delete');
@@ -151,7 +156,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
     //生活服务
     Route::get('service/index', 'ServiceController@index');
-    Route::get('service/{state}', 'ServiceController@stateList');
+    Route::get('service/{state}', 'ServiceController@getListByState');
+    Route::get('service/{type}', 'ServiceController@getListByType');
 
     Route::get('service/show/{id}', 'ServiceController@show');
     Route::delete('service/delete/{id}', 'ServiceController@delete');
@@ -159,7 +165,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
 
     //评论
     Route::get('comment/index', 'CommentController@index');
-    Route::get('comment/{state}', 'CommentController@stateList');
+    Route::get('comment/{state}', 'CommentController@getListByState');
+    Route::post('comment/content', 'CommentController@getListByContent');
 
     Route::get('comment/show/{id}', 'CommentController@show');
     Route::delete('comment/delete/{id}', 'CommentController@delete');
@@ -171,8 +178,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('suggest/show/{id}', 'SuggestController@show');
     Route::delete('suggest/delete/{id}', 'SuggestController@delete');
 
+    Route::get('suggest/{state}', 'SuggestController@getListByState');
+    Route::post('suggest/description', 'SuggestController@getListByDescription');
+
     //用户
     Route::get('user/index', 'UserController@index');
+    Route::get('user/admin/{admin}', 'UserController@getListByAdmin');
+    Route::post('user/username', 'UserController@getListByUsername');
+
     Route::get('user/show/{id}', 'UserController@show');
     Route::put('user/set/{id}', 'UserController@setAdmin');
     Route::put('user/cancel/{id}', 'UserController@cancelAdmin');

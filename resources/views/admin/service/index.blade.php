@@ -12,7 +12,35 @@
         <div class="page-header">
             <h1>生活服务 <small>列表</small></h1>
         </div>
-        <table class="table table-striped table-bordered table-condensed">
+
+        <div class="btn-group">
+            <div style="float: left">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    根据状态筛选
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{url('admin/service/index')}}"><i class="icon-trash"></i> 全部</a></li>
+                    <li><a href="{{url('admin/service',['state' => 'finish'])}}"><i class="icon-trash"></i> 完成</a></li>
+                    <li><a href="{{url('admin/service',['state' => 'unfinished'])}}"><i class="icon-trash"></i> 未完成</a></li>
+                </ul>
+            </div>
+
+            <div style="margin-left: 180px">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#" >
+                    根据类型筛选
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="margin-left: 180px">
+                    <li><a href="{{url('admin/service/index')}}"><i class="icon-trash"></i> 全部</a></li>
+                    <li><a href="{{url('admin/service',['type' => 'express'])}}"><i class="icon-trash"></i> 代取快递</a></li>
+                    <li><a href="{{url('admin/service',['type' => 'car_wash'])}}"><i class="icon-trash"></i> 上门洗车</a></li>
+                    <li><a href="{{url('admin/service',['type' => 'house_clean'])}}"><i class="icon-trash"></i> 家庭保洁</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <table class="table table-bordered" style="background: white;  margin-top: 18px">
             <thead>
                 <tr>
                     <th>序号</th>

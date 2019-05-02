@@ -7,7 +7,7 @@
     <!--<link href="css/style.css" rel="stylesheet" type="text/css">-->
     <style>
         body{font:12px/180% Arial,Helvetica,Verdana;color:#5a5a5a; margin:0; background:#FFF;}
-        body.login{ background: url('../img/bk1.jpg');	background-size:cover;}
+        body.login{ background: url('../img/bg.png');}
         table,td{font:12px/180% Arial, "宋体",Helvetica, sans-serif,Verdana; color:#58595b;}
         table{border-collapse:collapse; border-spacing:0; empty-cells:show; }
         th, td { border-collapse:collapse; }

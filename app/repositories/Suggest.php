@@ -28,6 +28,10 @@ class Suggest extends BaseRepo
             $query->where('state', $params['state']);
         }
 
+        if (! empty($params['description'])) {
+            $query->where('description', 'like','%' . $params['description'] . '%');
+        }
+
         if (! empty($params['type'])) {
             $query->where('type', $params['type']);
         }

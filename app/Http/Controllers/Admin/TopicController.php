@@ -28,15 +28,33 @@ class TopicController extends Controller
         return view('admin/topic/index', ['list' => $list ]);
     }
 
+    public function state()
+    {
+
+    }
+
     //根据状态筛选
-    public function stateList($state)
+    public function getListByState($state)
     {
         $params['state'] = $state;
+        $params['per_page'] = 10;
 
         $topicRepo = new TopicRepo();
-        $list = $topicRepo->getList();
+        $list = $topicRepo->getList($params);
 
         return view('admin/topic/index', ['list' => $list ]);
+    }
+
+    //根据内容筛选
+    public function getListByContent(Request $request)
+    {
+        $params['content'] = $request->input('content');
+        $params['per_page'] = 10;
+
+        $topic_repo = new TopicRepo();
+        $list = $topic_repo->getList($params);
+
+        return view('admin/topic/index', ['list' => $list]);
     }
 
     //新建

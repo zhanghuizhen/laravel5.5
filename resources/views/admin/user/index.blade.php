@@ -12,6 +12,24 @@
         <div class="page-header">
             <h1>用户管理 <small>列表</small></h1>
         </div>
+
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                根据用户身份筛选
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{url('admin/user/index')}}"><i class="icon-trash"></i> 全部</a></li>
+                <li><a href="{{url('admin/user/admin',['state' => 'yes'])}}"><i class="icon-trash"></i> 管理员</a></li>
+                <li><a href="{{url('admin/user/admin',['state' => 'no'])}}"><i class="icon-trash"></i> 非管理员</a></li>
+            </ul>
+
+            <form class="form-search"  action="{{ url('admin/user/username') }}" method="POST" style="margin-left: 150px" >
+                <input type="text" class="input-medium search-query" name="username">
+                <button type="submit" class="btn">根据用户名筛选</button>
+            </form>
+        </div>
+
         <table class="table table-striped table-bordered table-condensed">
             <thead>
             <tr>

@@ -12,7 +12,25 @@
         <div class="page-header">
             <h1>小区公告 <small>列表</small></h1>
         </div>
-        <table class="table table-striped table-bordered table-condensed">
+
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                根据状态筛选
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="{{url('admin/notice/index')}}"><i class="icon-trash"></i> 全部</a></li>
+                <li><a href="{{url('admin/notice',['state' => 'published'])}}"><i class="icon-trash"></i> 发布</a></li>
+                <li><a href="{{url('admin/notice',['state' => 'offline'])}}"><i class="icon-trash"></i> 下线</a></li>
+            </ul>
+
+            <form class="form-search"  action="{{ url('admin/notice/content') }}" method="POST" style="margin-left: 150px" >
+                <input type="text" class="input-medium search-query" name="content">
+                <button type="submit" class="btn">根据内容筛选</button>
+            </form>
+        </div>
+
+        <table class="table table-bordered" style="background: white;">
             <thead>
                 <tr>
                     <th>序号</th>

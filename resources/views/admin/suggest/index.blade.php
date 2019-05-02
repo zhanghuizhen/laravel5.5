@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="row-fluid">
-        <div class="page-header">
+        <div class="page-header" style="color: gray">
             <h1>投诉建议 <small>列表</small></h1>
         </div>
 
@@ -31,7 +31,7 @@
         </div>
 
 
-        <table class="table table-striped table-bordered table-condensed">
+        <table class="table table-bordered" style="background: white;">
             <thead>
             <tr>
                 <th>序号</th>

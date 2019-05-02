@@ -16,7 +16,7 @@ class SuggestController extends Controller
     public function index()
     {
         $params= [];
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $suggest_repo = new SuggestRepo();
         $list = $suggest_repo->getList($params);
@@ -28,7 +28,7 @@ class SuggestController extends Controller
     public function getListByState($state)
     {
         $params['state'] = $state;
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $suggest_repo =new SuggestRepo();
         $list = $suggest_repo->getList($params);
@@ -40,7 +40,7 @@ class SuggestController extends Controller
     public function getListByDescription(Request $request)
     {
         $params['description'] = $request->input('description');
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $suggest_repo = new SuggestRepo();
         $list = $suggest_repo->getList($params);

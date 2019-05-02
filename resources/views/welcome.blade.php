@@ -14,14 +14,14 @@
         <style>
             html, body {
                 /*background-color: #ffcc00;*/
-                color: #F5F5F5;
+                color: rgba(255,160,0,1);
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
 
-                background: url('../img/bk1.jpg');
-                background-size:cover;
+                background: url('../img/bg.png');
+                /*background-size:cover;*/
             }
 
             .full-height {
@@ -53,7 +53,7 @@
             }
 
             .links > a {
-                color: #F5F5F5;
+                color: rgba(255,160,0,1);
                 padding: 0 25px;
                 font-size: 15px;
                 font-weight: 700;

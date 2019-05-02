@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $params= [];
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $user_repo = new UserRepo();
 
@@ -29,7 +29,7 @@ class UserController extends Controller
     public function getListByAdmin($admin)
     {
         $params['admin'] = $admin;
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $user_repo = new UserRepo();
 
@@ -42,7 +42,7 @@ class UserController extends Controller
     public function getListByUsername(Request $request)
     {
         $params['username'] = $request->input('username');
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $user_repo = new UserRepo();
 

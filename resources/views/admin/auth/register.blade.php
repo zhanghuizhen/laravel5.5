@@ -73,11 +73,11 @@
                 <label>
                     <input type="password" name="re_password" id="re_password" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="******">
                 </label>
-                <p class="forgot"><a href="javascript:void(0);">忘记密码?</a></p>
+                <p class="forgot"><a href="javascript:void(0);"></a></p>
                 <div class="rem_sub">
 
                     <label>
-                        <input type="submit" class="sub_button" name="button" id="button" value="登录" style="opacity: 0.7;">
+                        <input type="submit" class="sub_button" name="button" id="button" value="注册" style="opacity: 0.7;">
                     </label>
                 </div>
             </div>

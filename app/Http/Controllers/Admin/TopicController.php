@@ -20,7 +20,7 @@ class TopicController extends Controller
     public function index(Request $request)
     {
         $params= [];
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $topicRepo = new TopicRepo();
         $list = $topicRepo->getList($params);
@@ -37,7 +37,7 @@ class TopicController extends Controller
     public function getListByState($state)
     {
         $params['state'] = $state;
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $topicRepo = new TopicRepo();
         $list = $topicRepo->getList($params);
@@ -49,7 +49,7 @@ class TopicController extends Controller
     public function getListByContent(Request $request)
     {
         $params['content'] = $request->input('content');
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $topic_repo = new TopicRepo();
         $list = $topic_repo->getList($params);

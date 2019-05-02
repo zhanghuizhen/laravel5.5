@@ -17,7 +17,7 @@ class RepairController extends Controller
     public function index(Request $request)
     {
         $params= [];
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $repair_repo = new RepairRepo();
         $list = $repair_repo->getList($params);
@@ -29,7 +29,7 @@ class RepairController extends Controller
     public function getListByState($state)
     {
         $params['state'] = $state;
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $repair_repo = new RepairRepo();
         $list = $repair_repo->getList($params);
@@ -41,7 +41,7 @@ class RepairController extends Controller
     public function getListByPart(Request $request)
     {
         $params['part'] = $request->input('part');
-        $params['per_page'] = 10;
+        $params['per_page'] = 5;
 
         $repair_repo = new RepairRepo();
 

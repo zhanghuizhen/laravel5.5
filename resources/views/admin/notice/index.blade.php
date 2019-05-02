@@ -9,7 +9,7 @@
 @section('content')
 
     <div class="row-fluid">
-        <div class="page-header">
+        <div class="page-header" style="color: gray">
             <h1>小区公告 <small>列表</small></h1>
         </div>
 

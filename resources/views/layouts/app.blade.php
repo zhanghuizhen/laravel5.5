@@ -129,13 +129,13 @@
 {{--style="background-color: rgba(255,160,0,1)--}}
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner" >
-        <div class="container-fluid">
+        <div class="container-fluid" style="background: white">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#" style="color: white">社区生活服务后台管理系统</a>
+            <a class="brand" href="#" style="color: goldenrod">社区生活服务后台管理系统</a>
             <div class="btn-group pull-right">
                 {{--<a class="btn" href="my-profile.html"><i class="icon-user"></i> 欢迎您 {{session('logined_username')}}</a>--}}
                 {{--<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">--}}
@@ -147,9 +147,9 @@
                     {{--<li><a href="#">Logout</a></li>--}}
                 {{--</ul>--}}
 
-                <span style="color:white;">欢迎您 {{session('logined_username')}}</span>
+                <span style="color: gray">欢迎您 {{session('logined_username')}}</span>
 
-                <span style="margin-left:20px"><a href="#" style="color: white">Logout</a></span>
+                <span style="margin-left:20px;"><a href="#" style="color: gray">Logout</a></span>
 
             </div>
 
@@ -211,7 +211,7 @@
 
     <hr>
 
-    <footer class="well" style="text-align: center">
+    <footer class="well" style="text-align: center;">
         社区服务管理系统
         <a href="http://software.hebtu.edu.cn/" target="_blank" title="软件学院"> @河北师范大学软件学院</a>
     </footer>

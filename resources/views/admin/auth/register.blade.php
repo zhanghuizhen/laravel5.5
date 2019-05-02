@@ -73,7 +73,7 @@
                 <label>
                     <input type="password" name="re_password" id="re_password" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="******">
                 </label>
-                <p class="forgot"><a href="javascript:void(0);"></a></p>
+                <p class="forgot">已有账号？<a href="{{url('auth/login')}}">登录</a></p>
                 <div class="rem_sub">
 
                     <label>

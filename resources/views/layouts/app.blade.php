@@ -180,8 +180,8 @@
 
 <div class="container-fluid" >
     <div class="row-fluid" >
-        <div class="span3" >
-            <div class="well sidebar-nav" style="height:400px;background: white">
+        <div class="span2" >
+            <div class="well sidebar-nav" style="height:400px;width:200px;background: white">
                 <ul class="nav nav-pills nav-stacked">
                     <li role="presentation"><a href="#">主页</a></li>
                     <li role="presentation"><a href="{{url('admin/user/index')}}" class="one">用户管理</a></li>

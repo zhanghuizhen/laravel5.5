@@ -28,7 +28,7 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
     Route::post('adminlogin', 'LoginController@adminLogin');
 
     //注销登录
-    Route::post('logout', 'LogoutController@logout');
+    Route::get('logout', 'LogoutController@logout');
 });
 
 //前台路由组
@@ -189,6 +189,20 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('user/show/{id}', 'UserController@show');
     Route::put('user/set/{id}', 'UserController@setAdmin');
     Route::put('user/cancel/{id}', 'UserController@cancelAdmin');
+
+    //小区
+    Route::get('address/index', 'AddressController@index');
+
+    Route::get('address/create', 'AddressController@showCreate');
+    Route::post('address/store', 'AddressController@store');
+    Route::post('address/address', 'AddressController@getListByAddress');
+
+    Route::get('address/edit/{id}', 'AddressController@edit');
+    Route::post('address/update/{id}', 'AddressController@update');
+
+    Route::delete('address/delete/{id}', 'AddressController@delete');
+
+    Route::get('address/show/{id}', 'AddressController@show');
 
 });
 

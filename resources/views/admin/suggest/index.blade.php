@@ -19,9 +19,9 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{{url('admin/suggest/index')}}"><i class="icon-trash"></i> 全部</a></li>
-                <li><a href="{{url('admin/suggest',['state' => 'published'])}}"><i class="icon-trash"></i> 发布</a></li>
-                <li><a href="{{url('admin/suggest',['state' => 'offline'])}}"><i class="icon-trash"></i> 下线</a></li>
+                <li><a href="{{url('admin/suggest/index')}}"><i class="icon-home"></i> 全部</a></li>
+                <li><a href="{{url('admin/suggest',['state' => 'published'])}}"><i class="icon-edit"></i> 发布</a></li>
+                <li><a href="{{url('admin/suggest',['state' => 'offline'])}}"><i class="icon-edit"></i> 下线</a></li>
             </ul>
 
             <form class="form-search"  action="{{ url('admin/suggest/description') }}" method="POST" style="margin-left: 150px" >

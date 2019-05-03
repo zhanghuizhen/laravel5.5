@@ -137,42 +137,12 @@
             </a>
             <a class="brand" href="#" style="color: goldenrod">社区生活服务后台管理系统</a>
             <div class="btn-group pull-right">
-                {{--<a class="btn" href="my-profile.html"><i class="icon-user"></i> 欢迎您 {{session('logined_username')}}</a>--}}
-                {{--<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">--}}
-                    {{--<span class="caret"></span>--}}
-                {{--</a>--}}
-                {{--<ul class="dropdown-menu">--}}
-                    {{--<li><a href="{{url('admin/user/show', ['id' => session('logined_id')])}}">查看个人资料</a></li>--}}
-                    {{--<li class="divider"></li>--}}
-                    {{--<li><a href="#">Logout</a></li>--}}
-                {{--</ul>--}}
 
                 <span style="color: gray">欢迎您 {{session('logined_username')}}</span>
 
-                <span style="margin-left:20px;"><a href="#" style="color: gray">Logout</a></span>
+                <span style="margin-left:20px;"><a href="{{url('auth/logout')}}" style="color: gray">Logout</a></span>
 
             </div>
-
-            {{--<div class="nav-collapse">--}}
-                {{--<ul class="nav">--}}
-                    {{--<li><a href="index.html">Home</a></li>--}}
-                    {{--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li><a href="new-user.html">New User</a></li>--}}
-                            {{--<li class="divider"></li>--}}
-                            {{--<li><a href="users.html">Manage Users</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Roles <b class="caret"></b></a>--}}
-                        {{--<ul class="dropdown-menu">--}}
-                            {{--<li><a href="new-role.html">New Role</a></li>--}}
-                            {{--<li class="divider"></li>--}}
-                            {{--<li><a href="roles.html">Manage Roles</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--<li><a href="stats.html">Stats</a></li>--}}
-                {{--</ul>--}}
-            {{--</div>--}}
 
         </div>
     </div>
@@ -183,7 +153,7 @@
         <div class="span2" >
             <div class="well sidebar-nav" style="height:400px;width:200px;background: white">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation"><a href="#">主页</a></li>
+                    {{--<li role="presentation"><a href="#">主页</a></li>--}}
                     <li role="presentation"><a href="{{url('admin/user/index')}}" class="one">用户管理</a></li>
                     <li role="presentation"><a href="{{url('admin/notice/index')}}" class="one">小区公告管理</a></li>
                     <li role="presentation"><a href="{{url('admin/service/index')}}" class="one">生活服务管理</a></li>
@@ -191,6 +161,7 @@
                     <li role="presentation"><a href="{{url('admin/suggest/index')}}" class="one">投诉建议管理</a></li>
                     <li role="presentation"><a href="{{url('admin/topic/index')}}" class="one">社区动态管理</a></li>
                     <li role="presentation"><a href="{{url('admin/comment/index')}}" class="one">评论管理</a></li>
+                    <li role="presentation"><a href="{{url('admin/address/index')}}" class="one">小区信息管理</a></li>
                 </ul>
 
             </div>

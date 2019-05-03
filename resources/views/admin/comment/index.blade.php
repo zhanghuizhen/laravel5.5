@@ -19,9 +19,9 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{{url('admin/comment/index')}}"><i class="icon-trash"></i> 全部</a></li>
-                <li><a href="{{url('admin/comment',['state' => 'published'])}}"><i class="icon-trash"></i> 发布</a></li>
-                <li><a href="{{url('admin/comment',['state' => 'offline'])}}"><i class="icon-trash"></i> 下线</a></li>
+                <li><a href="{{url('admin/comment/index')}}"><i class="icon-home"></i> 全部</a></li>
+                <li><a href="{{url('admin/comment',['state' => 'published'])}}"><i class="icon-edit"></i> 发布</a></li>
+                <li><a href="{{url('admin/comment',['state' => 'offline'])}}"><i class="icon-edit"></i> 下线</a></li>
             </ul>
 
             <form class="form-search"  action="{{ url('admin/comment/content') }}" method="POST" style="margin-left: 150px" >

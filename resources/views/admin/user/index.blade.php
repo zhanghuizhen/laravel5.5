@@ -19,9 +19,9 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{{url('admin/user/index')}}"><i class="icon-trash"></i> 全部</a></li>
-                <li><a href="{{url('admin/user/admin',['state' => 'yes'])}}"><i class="icon-trash"></i> 管理员</a></li>
-                <li><a href="{{url('admin/user/admin',['state' => 'no'])}}"><i class="icon-trash"></i> 非管理员</a></li>
+                <li><a href="{{url('admin/user/index')}}"><i class="icon-home"></i> 全部</a></li>
+                <li><a href="{{url('admin/user/admin',['state' => 'yes'])}}"><i class=" icon-star"></i> 管理员</a></li>
+                <li><a href="{{url('admin/user/admin',['state' => 'no'])}}"><i class="icon-star-empty"></i> 非管理员</a></li>
             </ul>
 
             <form class="form-search"  action="{{ url('admin/user/username') }}" method="POST" style="margin-left: 150px" >

@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\File;
 use Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,6 +25,13 @@ class NoticeController extends Controller
 
         $noticeRepo =new NoticeRepo();
         $list = $noticeRepo->getList($params);
+
+        foreach ($list as $value) {
+            $value->content = mb_substr($value->content, 0 , 20, "UTF-8") . '……';
+//            var_dump($value);die;
+        }
+
+//        var_dump($list);
 
         return view('admin/notice/index', ['list' => $list ]);
     }
@@ -67,7 +75,17 @@ class NoticeController extends Controller
     //创建
     public function store(Request $request)
     {
-        $params = $request->all(['title', 'content', 'cover', 'address', 'user_id']);
+        $params = $request->all(['title', 'content', 'address', 'user_id']);
+
+        $cover = $request->file('cover');
+        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($cover));
+
+        if(Storage::exists($path)){
+            $params['cover'] = 'http://127.0.0.1:8000/img'.$path;
+        }
 
         $params['state'] = 'published';
         $params['published_at'] = date('Y-m-d H:i:s');
@@ -89,25 +107,6 @@ class NoticeController extends Controller
         return view('admin/notice/show', ['data' => $notice]);
     }
 
-    //文件上传
-    public function upload(Request $request)
-    {
-        $path = Storage::putFile('',$request->file('file'));
-        $aResponse = [
-            "message"=>'上传成功',
-            "status_code"=>200,
-        ];
-        if ($path){
-            //$aResponse['image'] = 'http://140.143.75.82:81/images/'.$path;
-            $aResponse['image'] = 'http://localhost/img/'.$path;
-            return response()->json($aResponse);
-        }else{
-            $aResponse['message'] = '上传失败';
-            return response()->json($aResponse);
-        }
-    }
-
-
     //展示更新页面
     public function edit($id)
     {
@@ -125,7 +124,17 @@ class NoticeController extends Controller
     //更新
     public function update($id, Request $request)
     {
-        $params = $params = $request->all(['title', 'content', 'cover', 'address']);
+        $params = $params = $request->all(['title', 'content', 'address']);
+
+        $cover = $request->file('cover');
+        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($cover));
+
+        if(Storage::exists($path)){
+            $params['cover'] = 'http://127.0.0.1:8000/img'.$path;
+        }
 
         $noticeRepo = new NoticeRepo();
 

@@ -20,9 +20,9 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{url('admin/service/index')}}"><i class="icon-trash"></i> 全部</a></li>
-                    <li><a href="{{url('admin/service',['state' => 'finish'])}}"><i class="icon-trash"></i> 完成</a></li>
-                    <li><a href="{{url('admin/service',['state' => 'unfinished'])}}"><i class="icon-trash"></i> 未完成</a></li>
+                    <li><a href="{{url('admin/service/index')}}"><i class="icon-home"></i> 全部</a></li>
+                    <li><a href="{{url('admin/service',['state' => 'finish'])}}"><i class="icon-ok-circle"></i> 完成</a></li>
+                    <li><a href="{{url('admin/service',['state' => 'unfinished'])}}"><i class=" icon-remove-circle"></i> 未完成</a></li>
                 </ul>
             </div>
 

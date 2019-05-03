@@ -36,14 +36,19 @@
                     {{--</div>--}}
                 {{--</div>--}}
 
-                <form action="{{ url('admin/notice/upload') }}" method="POST">
                     <div class="control-group">
                         <label class="control-label" for="cover">图片</label>
                         <div class="controls">
                             <input type="file" name="cover" />
                         </div>
                     </div>
-                </form>
+
+                {{--<div class="control-group">--}}
+                    {{--<label class="control-label" for="content">图片</label>--}}
+                    {{--<div class="controls">--}}
+                        {{--<input type="file" class="btn btn-success btn-large" value="上传" name="file"/>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
                 <div class="form-actions">
                     <input type="submit" class="btn btn-success btn-large" value="创建" /> <a class="btn" href="{{url('admin/notice/index')}}">取消</a>

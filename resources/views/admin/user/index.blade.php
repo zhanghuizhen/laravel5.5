@@ -49,7 +49,15 @@
                 <tr class="list-users">
                     <td>{{$value->id}}</td>
                     <td>{{$value->username}}</td>
+
+                    {{--@if ($value->phone)--}}
+                        {{--<td>暂无手机号</td>--}}
+                    {{--@elseif--}}
+                        {{--<td>{{$value->phone}}</td>--}}
+                    {{--@endif--}}
+
                     <td>{{$value->phone}}</td>
+
                     <td><img style="width:80px; height:50px" src="{{ $value->avatar_url }}" alt=""> </td>
                     <td>{{$value->address}}</td>
                     {{--<td><img style="width:80px; height:50px" src="{{ $value->cover }}" alt=""> </td>--}}

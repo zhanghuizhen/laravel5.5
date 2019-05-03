@@ -36,7 +36,6 @@
                     <th>序号</th>
                     <th>标题</th>
                     <th>内容</th>
-                    <th>地址</th>
                     <th>图片</th>
                     <th>状态</th>
                     <th>发布时间</th>
@@ -49,7 +48,6 @@
                     <td>{{$value->id}}</td>
                     <td>{{$value->title}}</td>
                     <td>{{$value->content}}</td>
-                    <td>{{$value->address}}</td>
                     <td><img style="width:80px; height:50px" src="{{ $value->cover }}" alt=""> </td>
 
                     @if ( $value->state == 'published' )

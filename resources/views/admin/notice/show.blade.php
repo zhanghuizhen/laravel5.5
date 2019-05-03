@@ -33,10 +33,10 @@
                 <th>用户id</th>
                 <td>{{$data->user_id}}</td>
             </tr>
-            <tr>
-                <th>地址</th>
-                <td>{{$data->address}}</td>
-            </tr>
+            {{--<tr>--}}
+                {{--<th>地址</th>--}}
+                {{--<td>{{$data->address}}</td>--}}
+            {{--</tr>--}}
             <tr>
                 <th>图片</th>
                 <td><img style="width:80px; height:50px" src="{{ $data->cover }}" alt=""></td>

@@ -29,12 +29,12 @@
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="address">地址</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" name="address" />
-                    </div>
-                </div>
+                {{--<div class="control-group">--}}
+                    {{--<label class="control-label" for="address">地址</label>--}}
+                    {{--<div class="controls">--}}
+                        {{--<input type="text" class="input-xlarge" name="address" />--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
                 <form action="{{ url('admin/notice/upload') }}" method="POST">
                     <div class="control-group">

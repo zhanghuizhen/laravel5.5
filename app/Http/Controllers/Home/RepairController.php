@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Home;
 
 use App\repositories\Repair as RepairRepo;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -48,7 +50,7 @@ class RepairController extends Controller
     //创建
     public function store(Request $request)
     {
-        $params = $request->all(['address', 'part', 'repair_time', 'image','description',  'user_id']);
+        $params = $request->all(['address', 'part', 'repair_time', 'description',  'user_id']);
 
         if (empty($params['address'])) {
             return '报修地址不能为空';
@@ -64,6 +66,16 @@ class RepairController extends Controller
 
         if (empty($params['user_id'])) {
             $params['user_id'] = 1;
+        }
+
+        $image = $request->file('image');
+        $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($image));
+
+        if(Storage::exists($path)){
+            $params['image'] = 'http://127.0.0.1:8000/img'.$path;
         }
 
         $params['state'] = 'unfinished';
@@ -84,7 +96,7 @@ class RepairController extends Controller
     //更新
     public function update(Request $request)
     {
-        $params = $request->all(['id', 'address', 'part', 'repair_time', 'image','description']);
+        $params = $request->all(['id', 'address', 'part', 'repair_time', 'description']);
 
         if (empty($params['id'])) {
             return '数据id不能为空';
@@ -106,6 +118,16 @@ class RepairController extends Controller
 
         if (empty($params['repair_time'])) {
             return '接待时间不能为空';
+        }
+
+        $image = $request->file('image');
+        $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($image));
+
+        if(Storage::exists($path)){
+            $params['image'] = 'http://127.0.0.1:8000/img'.$path;
         }
 
         $result = $repair_repo->update($repair, $params);

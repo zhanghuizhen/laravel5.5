@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home;
 
 use App\Models\User as UserModel;
 use App\repositories\User as UserRepo;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,8 +15,7 @@ class UserController extends Controller
     //编辑个人资料
     public function edit(Request $request)
     {
-        $params = $request->all(['id', 'introduction', 'avatar_url',
-            'address', 'phone', 'username', 'cover']);
+        $params = $request->all(['id', 'introduction', 'address', 'phone']);
 
         if (empty($params['id'])) {
             return '用户id不能为空';
@@ -26,6 +27,26 @@ class UserController extends Controller
 
         if (empty($user)) {
             return '用户不存在';
+        }
+
+        $cover = $request->file('cover');
+        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($cover));
+
+        if(Storage::exists($path)){
+            $params['cover'] = 'http://127.0.0.1:8000/img'.$path;
+        }
+
+        $avatar_url = $request->file('avatar_url');
+        $fileName = md5(time().rand(0,10000)).'.'.$avatar_url->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($avatar_url));
+
+        if(Storage::exists($path)){
+            $params['avatar_url'] = 'http://127.0.0.1:8000/img'.$path;
         }
 
         $result = $user_repo->edit($user, $params);

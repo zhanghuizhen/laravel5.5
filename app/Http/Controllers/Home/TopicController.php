@@ -8,6 +8,8 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\repositories\Topic as TopicRepo;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class TopicController extends Controller
@@ -33,15 +35,7 @@ class TopicController extends Controller
     //新建
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'content' => 'string',
-            'cover' => 'string',
-            'user_id' => 'numeric',
-        ]);
-
-        $params = $request->only(['content', 'cover', 'user_id']);
-
-        //$params = $request->all(['content', 'cover', 'user_id']);
+        $params = $request->all(['content', 'user_id']);
 
         if (empty($params['content'])) {
             return '内容不能为空';
@@ -49,6 +43,16 @@ class TopicController extends Controller
 
         if (empty($params['user_id'])) {
             $params['user_id'] = 1;
+        }
+
+        $cover = $request->file('cover');
+        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($cover));
+
+        if(Storage::exists($path)){
+            $params['cover'] = 'http://127.0.0.1:8000/img'.$path;
         }
 
         $params['state'] = 'published';
@@ -70,14 +74,7 @@ class TopicController extends Controller
     //更新
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'id' => 'numeric',
-            'content' => 'string',
-            'cover' => 'string',
-            'user_id' => 'numeric',
-        ]);
-
-        $params = $request->only(['id', 'content', 'cover']);
+        $params = $request->all(['id', 'content', 'user_id']);
 
         if (empty($params['id'])) {
             return 'id不能为空';
@@ -92,6 +89,16 @@ class TopicController extends Controller
 
         if (empty($params['content'])) {
             return '内容不能为空';
+        }
+
+        $cover = $request->file('cover');
+        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($cover));
+
+        if(Storage::exists($path)){
+            $params['cover'] = 'http://127.0.0.1:8000/img'.$path;
         }
 
         $result = $topicRepo->update($topic, $params);

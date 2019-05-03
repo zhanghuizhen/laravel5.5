@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\repositories\Suggest as SuggestRepo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Response;
 
 class SuggestController extends Controller
@@ -27,7 +29,7 @@ class SuggestController extends Controller
     //创建
     public function store(Request $request)
     {
-        $params = $request->all(['address', 'type', 'image', 'description', 'user_id']);
+        $params = $request->all(['address', 'type', 'description', 'user_id']);
 
         if (empty($params['address'])) {
             return '小区地址不能为空';
@@ -43,6 +45,16 @@ class SuggestController extends Controller
 
         if (empty($params['description'])) {
             return '问题描述不能为空';
+        }
+
+        $image = $request->file('image');
+        $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($image));
+
+        if(Storage::exists($path)){
+            $params['image'] = 'http://127.0.0.1:8000/img'.$path;
         }
 
         $params['state'] = 'published';
@@ -63,7 +75,7 @@ class SuggestController extends Controller
     //更新
     public function update(Request $request)
     {
-        $params = $request->all(['address', 'type', 'image', 'description', 'id']);
+        $params = $request->all(['address', 'type', 'description', 'id']);
 
         if (empty($params['id'])) {
             return 'id不能为空';
@@ -85,6 +97,16 @@ class SuggestController extends Controller
 
         if (empty($params['description'])) {
             return '问题描述不能为空';
+        }
+
+        $image = $request->file('image');
+        $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
+        $path = '/'.$fileName;
+
+        Storage::put($path,File::get($image));
+
+        if(Storage::exists($path)){
+            $params['image'] = 'http://127.0.0.1:8000/img'.$path;
         }
 
         $result = $suggest_repo->update($suggest, $params);

@@ -27,11 +27,11 @@ class NoticeController extends Controller
         $list = $noticeRepo->getList($params);
 
         foreach ($list as $value) {
-            $value->content = mb_substr($value->content, 0 , 20, "UTF-8") . '……';
-//            var_dump($value);die;
+            $length = mb_strlen($value->content);
+            if ($length >= 10) {
+                $value->content = mb_substr($value->content, 0 , 20, "UTF-8") . '……';
+            }
         }
-
-//        var_dump($list);
 
         return view('admin/notice/index', ['list' => $list ]);
     }
@@ -78,13 +78,17 @@ class NoticeController extends Controller
         $params = $request->all(['title', 'content', 'address', 'user_id']);
 
         $cover = $request->file('cover');
-        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($cover));
+        if (! empty($cover)) {
 
-        if(Storage::exists($path)){
-            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+            $path = '/'.$fileName;
+
+            Storage::put($path,File::get($cover));
+
+            if(Storage::exists($path)){
+                $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $params['state'] = 'published';
@@ -127,13 +131,16 @@ class NoticeController extends Controller
         $params = $params = $request->all(['title', 'content', 'address']);
 
         $cover = $request->file('cover');
-        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($cover));
+        if (! empty($cover)) {
+            $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+            $path = '/'.$fileName;
 
-        if(Storage::exists($path)){
-            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            Storage::put($path,File::get($cover));
+
+            if(Storage::exists($path)){
+                $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $noticeRepo = new NoticeRepo();

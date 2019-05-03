@@ -21,6 +21,12 @@ class SuggestController extends Controller
         $suggest_repo = new SuggestRepo();
         $list = $suggest_repo->getList($params);
 
+        foreach ($list as $value) {
+            if (empty($value->description)) {
+                $value->descrption = '暂无描述';
+            }
+        }
+
         return view('admin/suggest/index', ['list' => $list]);
     }
 
@@ -56,6 +62,10 @@ class SuggestController extends Controller
 
         if (! $suggest) {
             return '数据不存在';
+        }
+
+        if (empty($suggest->description)) {
+            $suggest->descrption = '暂无描述';
         }
 
         return view('admin/suggest/show', ['data' => $suggest]);

@@ -22,6 +22,16 @@ class UserController extends Controller
 
         $list = $user_repo->getList($params);
 
+        foreach ($list as $value) {
+            if (empty($value->introduction)) {
+                $value->introduction = '暂无简介';
+            }
+
+            if (empty($value->phone)) {
+                $value->phone = '暂无手机号';
+            }
+        }
+
         return view('admin/user/index', ['list' => $list]);
     }
 
@@ -78,6 +88,14 @@ class UserController extends Controller
 
         if (! $user) {
             return '数据不存在';
+        }
+
+        if (empty($user->introduction)) {
+            $user->introduction = '暂无简介';
+        }
+
+        if (empty($user->phone)) {
+            $user->phone = '暂无手机号';
         }
 
         return view('admin/user/show', ['data' => $user]);

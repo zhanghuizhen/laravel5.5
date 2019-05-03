@@ -22,6 +22,13 @@ class CommentController extends Controller
 
         $list = $comment_repo->getList($params);
 
+        foreach ($list as $value) {
+            $length = mb_strlen($value->content);
+            if ($length >= 10) {
+                $value->content = mb_substr($value->content, 0 , 20, "UTF-8") . '……';
+            }
+        }
+
         return view('admin/comment/index', ['list' => $list]);
     }
 

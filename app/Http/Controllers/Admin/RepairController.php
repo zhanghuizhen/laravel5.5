@@ -22,6 +22,17 @@ class RepairController extends Controller
         $repair_repo = new RepairRepo();
         $list = $repair_repo->getList($params);
 
+        foreach ($list as $value) {
+            $length = mb_strlen($value->description);
+            if ($length >= 10) {
+                $value->description = mb_substr($value->description, 0 , 20, "UTF-8") . '……';
+            }
+
+            if (empty($value->description)) {
+                $value->descrption = '暂无描述';
+            }
+        }
+
         return view('admin/repair/index', ['list' => $list ]);
     }
 
@@ -59,6 +70,10 @@ class RepairController extends Controller
 
         if (! $repair) {
             return '数据不存在';
+        }
+
+        if (empty($repair->description)) {
+            $repair->descrption = '暂无描述';
         }
 
         return view('admin/repair/show', ['data' => $repair]);

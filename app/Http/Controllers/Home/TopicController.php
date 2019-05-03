@@ -46,13 +46,16 @@ class TopicController extends Controller
         }
 
         $cover = $request->file('cover');
-        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($cover));
+        if (! empty($cover)) {
+            $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+            $path = '/'.$fileName;
 
-        if(Storage::exists($path)){
-            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            Storage::put($path,File::get($cover));
+
+            if(Storage::exists($path)){
+                $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $params['state'] = 'published';
@@ -92,13 +95,16 @@ class TopicController extends Controller
         }
 
         $cover = $request->file('cover');
-        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($cover));
+        if (! empty($cover)) {
+            $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+            $path = '/'.$fileName;
 
-        if(Storage::exists($path)){
-            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            Storage::put($path,File::get($cover));
+
+            if(Storage::exists($path)){
+                $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $result = $topicRepo->update($topic, $params);

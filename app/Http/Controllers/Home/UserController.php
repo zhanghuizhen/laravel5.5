@@ -30,23 +30,29 @@ class UserController extends Controller
         }
 
         $cover = $request->file('cover');
-        $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($cover));
+        if (! empty($cover)) {
+            $fileName = md5(time().rand(0,10000)).'.'.$cover->getClientOriginalName();
+            $path = '/'.$fileName;
 
-        if(Storage::exists($path)){
-            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            Storage::put($path,File::get($cover));
+
+            if(Storage::exists($path)){
+                $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $avatar_url = $request->file('avatar_url');
-        $fileName = md5(time().rand(0,10000)).'.'.$avatar_url->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($avatar_url));
+        if (! empty($avatar_url)){
+            $fileName = md5(time().rand(0,10000)).'.'.$avatar_url->getClientOriginalName();
+            $path = '/'.$fileName;
 
-        if(Storage::exists($path)){
-            $params['avatar_url'] = 'http://140.143.6.115:80/img'.$path;
+            Storage::put($path,File::get($avatar_url));
+
+            if(Storage::exists($path)){
+                $params['avatar_url'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $result = $user_repo->edit($user, $params);

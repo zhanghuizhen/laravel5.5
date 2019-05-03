@@ -69,13 +69,16 @@ class RepairController extends Controller
         }
 
         $image = $request->file('image');
-        $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($image));
+        if (! empty($image)) {
+            $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
+            $path = '/'.$fileName;
 
-        if(Storage::exists($path)){
-            $params['image'] = 'http://140.143.6.115:80/img'.$path;
+            Storage::put($path,File::get($image));
+
+            if(Storage::exists($path)){
+                $params['image'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $params['state'] = 'unfinished';
@@ -121,13 +124,16 @@ class RepairController extends Controller
         }
 
         $image = $request->file('image');
-        $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
-        $path = '/'.$fileName;
 
-        Storage::put($path,File::get($image));
+        if (! empty($image)) {
+            $fileName = md5(time().rand(0,10000)).'.'.$image->getClientOriginalName();
+            $path = '/'.$fileName;
 
-        if(Storage::exists($path)){
-            $params['image'] = 'http://140.143.6.115:80/img'.$path;
+            Storage::put($path,File::get($image));
+
+            if(Storage::exists($path)){
+                $params['image'] = 'http://140.143.6.115:80/img'.$path;
+            }
         }
 
         $result = $repair_repo->update($repair, $params);

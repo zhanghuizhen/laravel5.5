@@ -75,7 +75,7 @@ class RepairController extends Controller
         Storage::put($path,File::get($image));
 
         if(Storage::exists($path)){
-            $params['image'] = 'http://140.143.5.116:80/img'.$path;
+            $params['image'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $params['state'] = 'unfinished';
@@ -127,7 +127,7 @@ class RepairController extends Controller
         Storage::put($path,File::get($image));
 
         if(Storage::exists($path)){
-            $params['image'] = 'http://140.143.5.116:80/img'.$path;
+            $params['image'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $result = $repair_repo->update($repair, $params);

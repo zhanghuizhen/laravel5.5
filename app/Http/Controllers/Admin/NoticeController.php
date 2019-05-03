@@ -84,7 +84,7 @@ class NoticeController extends Controller
         Storage::put($path,File::get($cover));
 
         if(Storage::exists($path)){
-            $params['cover'] = 'http://140.143.5.116:80/img'.$path;
+            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $params['state'] = 'published';
@@ -133,7 +133,7 @@ class NoticeController extends Controller
         Storage::put($path,File::get($cover));
 
         if(Storage::exists($path)){
-            $params['cover'] = 'http://140.143.5.116:80/img'.$path;
+            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $noticeRepo = new NoticeRepo();

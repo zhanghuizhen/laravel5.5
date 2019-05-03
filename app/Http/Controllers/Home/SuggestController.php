@@ -54,7 +54,7 @@ class SuggestController extends Controller
         Storage::put($path,File::get($image));
 
         if(Storage::exists($path)){
-            $params['image'] = 'http://140.143.5.116:80/img'.$path;
+            $params['image'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $params['state'] = 'published';
@@ -106,7 +106,7 @@ class SuggestController extends Controller
         Storage::put($path,File::get($image));
 
         if(Storage::exists($path)){
-            $params['image'] = 'http://140.143.5.116:80/img'.$path;
+            $params['image'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $result = $suggest_repo->update($suggest, $params);

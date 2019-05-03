@@ -36,7 +36,7 @@ class UserController extends Controller
         Storage::put($path,File::get($cover));
 
         if(Storage::exists($path)){
-            $params['cover'] = 'http://127.0.0.1:8000/img'.$path;
+            $params['cover'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $avatar_url = $request->file('avatar_url');
@@ -46,7 +46,7 @@ class UserController extends Controller
         Storage::put($path,File::get($avatar_url));
 
         if(Storage::exists($path)){
-            $params['avatar_url'] = 'http://127.0.0.1:8000/img'.$path;
+            $params['avatar_url'] = 'http://140.143.6.115:80/img'.$path;
         }
 
         $result = $user_repo->edit($user, $params);

@@ -52,7 +52,7 @@ class TopicController extends Controller
         Storage::put($path,File::get($cover));
 
         if(Storage::exists($path)){
-            $params['cover'] = 'http://127.0.0.1:8000/img'.$path;
+            $params['cover'] = 'http://140.143.5.116:80/img'.$path;
         }
 
         $params['state'] = 'published';

@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1>报修 <small>详情</small></h1>
         </div>
-        <table class="table table-striped" style="width: 500px">
+        <table class="table" style="width: 500px;background: white">
             <tr>
                 <th>分类</th>
                 <td>{{$data->part}}</td>

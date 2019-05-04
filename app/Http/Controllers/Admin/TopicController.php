@@ -28,11 +28,6 @@ class TopicController extends Controller
         return view('admin/topic/index', ['list' => $list ]);
     }
 
-    public function state()
-    {
-
-    }
-
     //根据状态筛选
     public function getListByState($state)
     {

@@ -18,6 +18,18 @@ class ServiceController extends Controller
         $service_repo = new ServiceRepo();
         $list = $service_repo->getList($params);
 
+        foreach ($list as $value) {
+
+            $length = mb_strlen($value->description);
+            if ($length >= 10) {
+                $value->description = mb_substr($value->description, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($length <= 0) {
+                $value->description = '暂无描述';
+            }
+        }
+
         return view('admin/service/index', ['list' => $list]);
     }
 
@@ -29,6 +41,18 @@ class ServiceController extends Controller
 
         $service_repo = new ServiceRepo();
         $list = $service_repo->getList($params);
+
+        foreach ($list as $value) {
+
+            $length = mb_strlen($value->description);
+            if ($length >= 10) {
+                $value->description = mb_substr($value->description, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($length <= 0) {
+                $value->description = '暂无描述';
+            }
+        }
 
         return view('admin/service/index', ['list' => $list]);
     }
@@ -42,6 +66,18 @@ class ServiceController extends Controller
         $service_repo = new ServiceRepo();
         $list = $service_repo->getList($params);
 
+        foreach ($list as $value) {
+
+            $length = mb_strlen($value->description);
+            if ($length >= 10) {
+                $value->description = mb_substr($value->description, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($length <= 0) {
+                $value->description = '暂无描述';
+            }
+        }
+
         return view('admin/service/index', ['list' => $list]);
     }
 
@@ -53,6 +89,10 @@ class ServiceController extends Controller
 
         if (! $service) {
             return '数据不存在';
+        }
+
+        if (empty($service->description)) {
+            $service->description = '暂无描述';
         }
 
         return view('admin/service/show', ['data' => $service]);

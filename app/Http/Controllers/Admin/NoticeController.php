@@ -45,6 +45,13 @@ class NoticeController extends Controller
         $noticeRepo =new NoticeRepo();
         $list = $noticeRepo->getList($params);
 
+        foreach ($list as $value) {
+            $length = mb_strlen($value->content);
+            if ($length >= 10) {
+                $value->content = mb_substr($value->content, 0 , 20, "UTF-8") . '……';
+            }
+        }
+
         return view('admin/notice/index', ['list' => $list ]);
     }
 
@@ -56,6 +63,13 @@ class NoticeController extends Controller
 
         $notice_repo = new NoticeRepo();
         $list = $notice_repo->getList($params);
+
+        foreach ($list as $value) {
+            $length = mb_strlen($value->content);
+            if ($length >= 10) {
+                $value->content = mb_substr($value->content, 0 , 20, "UTF-8") . '……';
+            }
+        }
 
         return view('admin/notice/index', ['list' => $list]);
     }

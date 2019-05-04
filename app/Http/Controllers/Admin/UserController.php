@@ -23,12 +23,32 @@ class UserController extends Controller
         $list = $user_repo->getList($params);
 
         foreach ($list as $value) {
-            if (empty($value->introduction)) {
-                $value->introduction = '暂无简介';
+
+            $introduction_length = mb_strlen($value->introduction);
+            if ($introduction_length >= 10) {
+                $value->introduction = mb_substr($value->introduction, 0 , 20, "UTF-8") . '……';
             }
 
-            if (empty($value->phone)) {
+            if ($introduction_length <= 0) {
+                $value->introduction = '暂无介绍';
+            }
+
+            $phone_length = mb_strlen($value->phone);
+            if ($phone_length >= 10) {
+                $value->phone = mb_substr($value->phone, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($phone_length <= 0) {
                 $value->phone = '暂无手机号';
+            }
+
+            $address_length = mb_strlen($value->address);
+            if ($address_length >= 10) {
+                $value->address = mb_substr($value->address, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($address_length <= 0) {
+                $value->address = '暂无地址';
             }
         }
 
@@ -45,6 +65,36 @@ class UserController extends Controller
 
         $list = $user_repo->getList($params);
 
+        foreach ($list as $value) {
+
+            $introduction_length = mb_strlen($value->introduction);
+            if ($introduction_length >= 10) {
+                $value->introduction = mb_substr($value->introduction, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($introduction_length <= 0) {
+                $value->introduction = '暂无介绍';
+            }
+
+            $phone_length = mb_strlen($value->phone);
+            if ($phone_length >= 10) {
+                $value->phone = mb_substr($value->phone, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($phone_length <= 0) {
+                $value->phone = '暂无手机号';
+            }
+
+            $address_length = mb_strlen($value->address);
+            if ($address_length >= 10) {
+                $value->address = mb_substr($value->address, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($address_length <= 0) {
+                $value->address = '暂无地址';
+            }
+        }
+
         return view('admin/user/index', ['list' => $list]);
     }
 
@@ -57,6 +107,36 @@ class UserController extends Controller
         $user_repo = new UserRepo();
 
         $list = $user_repo->getList($params);
+
+        foreach ($list as $value) {
+
+            $introduction_length = mb_strlen($value->introduction);
+            if ($introduction_length >= 10) {
+                $value->introduction = mb_substr($value->introduction, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($introduction_length <= 0) {
+                $value->introduction = '暂无介绍';
+            }
+
+            $phone_length = mb_strlen($value->phone);
+            if ($phone_length >= 10) {
+                $value->phone = mb_substr($value->phone, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($phone_length <= 0) {
+                $value->phone = '暂无手机号';
+            }
+
+            $address_length = mb_strlen($value->address);
+            if ($address_length >= 10) {
+                $value->address = mb_substr($value->address, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($address_length <= 0) {
+                $value->address = '暂无地址';
+            }
+        }
 
         return view('admin/user/index', ['list' => $list]);
     }
@@ -96,6 +176,10 @@ class UserController extends Controller
 
         if (empty($user->phone)) {
             $user->phone = '暂无手机号';
+        }
+
+        if (empty($user->address)) {
+            $user->address = '暂无地址';
         }
 
         return view('admin/user/show', ['data' => $user]);

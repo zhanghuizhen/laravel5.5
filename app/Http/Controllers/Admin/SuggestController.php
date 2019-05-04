@@ -22,7 +22,12 @@ class SuggestController extends Controller
         $list = $suggest_repo->getList($params);
 
         foreach ($list as $value) {
-            if (empty($value->description)) {
+            $length = mb_strlen($value->description);
+            if ($length >= 10) {
+                $value->description = mb_substr($value->description, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($length <= 0) {
                 $value->descrption = '暂无描述';
             }
         }
@@ -39,6 +44,17 @@ class SuggestController extends Controller
         $suggest_repo =new SuggestRepo();
         $list = $suggest_repo->getList($params);
 
+        foreach ($list as $value) {
+            $length = mb_strlen($value->description);
+            if ($length >= 10) {
+                $value->description = mb_substr($value->description, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($length <= 0) {
+                $value->descrption = '暂无描述';
+            }
+        }
+
         return view('admin/suggest/index', ['list' => $list ]);
     }
 
@@ -50,6 +66,17 @@ class SuggestController extends Controller
 
         $suggest_repo = new SuggestRepo();
         $list = $suggest_repo->getList($params);
+
+        foreach ($list as $value) {
+            $length = mb_strlen($value->description);
+            if ($length >= 10) {
+                $value->description = mb_substr($value->description, 0 , 20, "UTF-8") . '……';
+            }
+
+            if ($length <= 0) {
+                $value->descrption = '暂无描述';
+            }
+        }
 
         return view('admin/suggest/index', ['list' => $list]);
     }

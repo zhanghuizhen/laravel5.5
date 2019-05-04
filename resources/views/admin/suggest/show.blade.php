@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1>投诉意见 <small>详情</small></h1>
         </div>
-        <table class="table table-striped" style="width: 500px">
+        <table class="table" style="width: 500px;background: white">
             <tr>
                 <th>问题描述</th>
                 <td>{{$data->description}}</td>

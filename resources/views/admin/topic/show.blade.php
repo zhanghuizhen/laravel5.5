@@ -13,10 +13,10 @@
             <h1>社区动态 <small>详情</small></h1>
         </div>
         <table class="table" style="width: 500px;background: white">
-            <tr>
-                <th>标题</th>
-                <td>{{$data->title}}</td>
-            </tr>
+            {{--<tr>--}}
+                {{--<th>标题</th>--}}
+                {{--<td>{{$data->title}}</td>--}}
+            {{--</tr>--}}
             <tr>
                 <th>内容</th>
                 <td>{{$data->content}}</td>

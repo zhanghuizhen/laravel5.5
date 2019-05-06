@@ -34,10 +34,6 @@ class UserController extends Controller
             }
 
             $phone_length = mb_strlen($value->phone);
-            if ($phone_length >= 10) {
-                $value->phone = mb_substr($value->phone, 0 , 20, "UTF-8") . '……';
-            }
-
             if ($phone_length <= 0) {
                 $value->phone = '暂无手机号';
             }
@@ -77,10 +73,6 @@ class UserController extends Controller
             }
 
             $phone_length = mb_strlen($value->phone);
-            if ($phone_length >= 10) {
-                $value->phone = mb_substr($value->phone, 0 , 20, "UTF-8") . '……';
-            }
-
             if ($phone_length <= 0) {
                 $value->phone = '暂无手机号';
             }
@@ -120,10 +112,6 @@ class UserController extends Controller
             }
 
             $phone_length = mb_strlen($value->phone);
-            if ($phone_length >= 10) {
-                $value->phone = mb_substr($value->phone, 0 , 20, "UTF-8") . '……';
-            }
-
             if ($phone_length <= 0) {
                 $value->phone = '暂无手机号';
             }

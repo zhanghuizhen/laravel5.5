@@ -17,14 +17,14 @@
                 <th>评论内容</th>
                 <td>{{$data->content}}</td>
             </tr>
-            <tr>
-                <th>根评论id</th>
-                <td>{{$data->root_id}}</td>
-            </tr>
-            <tr>
-                <th>父评论id</th>
-                <td>{{$data->parent_id}}</td>
-            </tr>
+            {{--<tr>--}}
+                {{--<th>根评论id</th>--}}
+                {{--<td>{{$data->root_id}}</td>--}}
+            {{--</tr>--}}
+            {{--<tr>--}}
+                {{--<th>父评论id</th>--}}
+                {{--<td>{{$data->parent_id}}</td>--}}
+            {{--</tr>--}}
             <tr>
                 <th>状态</th>
                 @if ( $data->state == 'published' )

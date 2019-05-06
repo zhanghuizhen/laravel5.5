@@ -14,17 +14,17 @@
         </div>
 
         <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                根据状态筛选
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="{{url('admin/suggest/index')}}"><i class="icon-home"></i> 全部</a></li>
-                <li><a href="{{url('admin/suggest',['state' => 'published'])}}"><i class="icon-edit"></i> 发布</a></li>
-                <li><a href="{{url('admin/suggest',['state' => 'offline'])}}"><i class="icon-edit"></i> 下线</a></li>
-            </ul>
+            {{--<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">--}}
+                {{--根据状态筛选--}}
+                {{--<span class="caret"></span>--}}
+            {{--</a>--}}
+            {{--<ul class="dropdown-menu">--}}
+                {{--<li><a href="{{url('admin/suggest/index')}}"><i class="icon-home"></i> 全部</a></li>--}}
+                {{--<li><a href="{{url('admin/suggest',['state' => 'published'])}}"><i class="icon-edit"></i> 发布</a></li>--}}
+                {{--<li><a href="{{url('admin/suggest',['state' => 'offline'])}}"><i class="icon-edit"></i> 下线</a></li>--}}
+            {{--</ul>--}}
 
-            <form class="form-search"  action="{{ url('admin/suggest/description') }}" method="POST" style="margin-left: 150px" >
+            <form class="form-search"  action="{{ url('admin/suggest/description') }}" method="POST">
                 <input type="text" class="input-medium search-query" name="description">
                 <button type="submit" class="btn">根据内容筛选</button>
             </form>

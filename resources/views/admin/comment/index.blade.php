@@ -38,8 +38,8 @@
                 <th>评论内容</th>
                 <th>用户id</th>
                 <th>社区广场数据id</th>
-                <th>根评论id</th>
-                <th>父评论id</th>
+                {{--<th>根评论id</th>--}}
+                {{--<th>父评论id</th>--}}
                 <th>状态</th>
                 <th>操作</th>
             </tr>
@@ -51,8 +51,8 @@
                     <td>{{$value->content}}</td>
                     <td>{{$value->user_id}}</td>
                     <td>{{$value->topic_id}}</td>
-                    <td>{{$value->root_id}}</td>
-                    <td>{{$value->parent_id}}</td>
+                    {{--<td>{{$value->root_id}}</td>--}}
+                    {{--<td>{{$value->parent_id}}</td>--}}
 
                     @if ( $value->state == 'published' )
                         <td> <span class="label label-success">已发布</span> </td>

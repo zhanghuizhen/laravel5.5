@@ -108,15 +108,15 @@ class NoticeController extends Controller
         $params['state'] = 'published';
         $params['published_at'] = date('Y-m-d H:i:s');
 
-        $noticeRepo = new NoticeRepo();
-        $notice = $noticeRepo->store($params);
-
         $user_id = session('logined_id');
         if (empty($user_id)) {
             $params['user_id'] = 1;
         } else {
             $params['user_id'] = session('logined_id');
         }
+
+        $noticeRepo = new NoticeRepo();
+        $notice = $noticeRepo->store($params);
 
         if (! $notice) {
             return view('admin/notice/create');

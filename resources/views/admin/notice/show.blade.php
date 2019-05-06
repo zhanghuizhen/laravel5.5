@@ -18,10 +18,6 @@
                 <td>{{$data->title}}</td>
             </tr>
             <tr>
-                <th>用户id</th>
-                <td>{{$data->user_id}}</td>
-            </tr>
-            <tr>
                 <th>内容</th>
                 <td>{{$data->content}}</td>
             </tr>

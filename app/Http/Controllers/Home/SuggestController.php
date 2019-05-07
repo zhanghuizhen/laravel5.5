@@ -56,7 +56,7 @@ class SuggestController extends Controller
             Storage::put($path,File::get($image));
 
             if(Storage::exists($path)){
-                $params['image'] = 'http://140.143.6.115:80/img'.$path;
+                $params['image'] = 'http://188.131.192.194:83/img'.$path;
             }
         }
 
@@ -111,7 +111,7 @@ class SuggestController extends Controller
             Storage::put($path,File::get($image));
 
             if(Storage::exists($path)){
-                $params['image'] = 'http://140.143.6.115:80/img'.$path;
+                $params['image'] = 'http://188.131.192.194:83/img'.$path;
             }
         }
 

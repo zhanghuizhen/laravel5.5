@@ -38,7 +38,7 @@ class UserController extends Controller
             Storage::put($path,File::get($cover));
 
             if(Storage::exists($path)){
-                $params['cover'] = 'http://140.143.6.115:80/img'.$path;
+                $params['cover'] = 'http://188.131.192.194:83/img'.$path;
             }
         }
 
@@ -51,7 +51,7 @@ class UserController extends Controller
             Storage::put($path,File::get($avatar_url));
 
             if(Storage::exists($path)){
-                $params['avatar_url'] = 'http://140.143.6.115:80/img'.$path;
+                $params['avatar_url'] = 'http://188.131.192.194:83/img'.$path;
             }
         }
 

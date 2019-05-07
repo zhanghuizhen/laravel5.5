@@ -29,7 +29,7 @@ class RepairController extends Controller
             }
 
             if ($length <= 0) {
-                $value->descrption = '暂无描述';
+                $value->description = '暂无描述';
             }
         }
 
@@ -52,7 +52,7 @@ class RepairController extends Controller
             }
 
             if ($length <= 0) {
-                $value->descrption = '暂无描述';
+                $value->description = '暂无描述';
             }
         }
 
@@ -76,7 +76,7 @@ class RepairController extends Controller
             }
 
             if ($length <= 0) {
-                $value->descrption = '暂无描述';
+                $value->description = '暂无描述';
             }
         }
 
@@ -95,7 +95,7 @@ class RepairController extends Controller
         }
 
         if (empty($repair->description)) {
-            $repair->descrption = '暂无描述';
+            $repair->description = '暂无描述';
         }
 
         return view('admin/repair/show', ['data' => $repair]);

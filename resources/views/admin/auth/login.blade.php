@@ -69,7 +69,7 @@
                 <label>
                     <input type="password" name="password" id="password" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="******">
                 </label>
-                <p class="forgot"><a href="javascript:void(0);" style="float: left">忘记密码?</a>没有账号？<a href="{{url('auth/register')}}">注册</a></p>
+                <p class="forgot"><a href="javascript:void(0);" style="float: left"></a>没有账号？<a href="{{url('auth/register')}}">注册</a></p>
 
                 <div class="rem_sub">
 

@@ -157,7 +157,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     //生活服务
     Route::get('service/index', 'ServiceController@index');
     Route::get('service/{state}', 'ServiceController@getListByState');
-    Route::get('service/{type}', 'ServiceController@getListByType');
+    Route::get('service/type/{type}', 'ServiceController@getListByType');
 
     Route::get('service/show/{id}', 'ServiceController@show');
     Route::delete('service/delete/{id}', 'ServiceController@delete');

@@ -33,9 +33,9 @@
                 </a>
                 <ul class="dropdown-menu" style="margin-left: 180px">
                     <li><a href="{{url('admin/service/index')}}"><i class="icon-trash"></i> 全部</a></li>
-                    <li><a href="{{url('admin/service',['type' => 'express'])}}"><i class="icon-trash"></i> 代取快递</a></li>
-                    <li><a href="{{url('admin/service',['type' => 'car_wash'])}}"><i class="icon-trash"></i> 上门洗车</a></li>
-                    <li><a href="{{url('admin/service',['type' => 'house_clean'])}}"><i class="icon-trash"></i> 家庭保洁</a></li>
+                    <li><a href="{{url('admin/service/type',['type' => 'express'])}}"><i class="icon-trash"></i> 代取快递</a></li>
+                    <li><a href="{{url('admin/service/type',['type' => 'car_wash'])}}"><i class="icon-trash"></i> 上门洗车</a></li>
+                    <li><a href="{{url('admin/service/type',['type' => 'house_clean'])}}"><i class="icon-trash"></i> 家庭保洁</a></li>
                 </ul>
             </div>
         </div>
